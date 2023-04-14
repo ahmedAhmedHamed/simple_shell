@@ -25,7 +25,7 @@ int main(void)
 		int processID;
 		printf("$ ");
 		characters = getline(&b, &bufSize,  stdin);
-		if (characters == 1)
+		if (feof(stdin)) /*checking for end of file*/
 			return (0);
 		processID = fork();
 		if (!processID)
