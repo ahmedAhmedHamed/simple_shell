@@ -33,12 +33,9 @@ int _strlen(const char *s)
 void printenv()/*unfinished*/
 {
 	extern char **environ;
-	int i = 0;
-	while (environ != NULL && *environ != NULL)
-	{
-		printf("%s", environ[i]);
-		i++;
-	}
+	int i;
+	for (i = 0; environ[i] != NULL; i++)
+		printf("\n%s", environ[i]);
 }
 
 /**
