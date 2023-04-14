@@ -66,12 +66,12 @@ int main(void)
 	int waitID;
 	extern char **environ;
 	char buffer[1000];
-	char *b = buffer;
-	size_t bufSize = 1000;
+	char *b = buffer;/*necessary for usage with getline*/
+	size_t bufSize = 1000;/*TODO dont forget that this is linked to buffer*/
 	size_t characters;
 	int processID;
 	struct stat istat;/*for usage with stat to check if file exists*/
-	char *argv[10];
+	char *argv[10];/*TODO change if too low*/
 	int i = 0;
 	while (true)
 	{
