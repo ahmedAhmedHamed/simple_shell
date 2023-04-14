@@ -61,7 +61,6 @@ int main(void)
 	{
 		for (i = 0; i < 10; i++)
 			argv[i] = NULL;
-		i = 0;
 		printf("$ ");
 		characters = getline(&b, &bufSize,  stdin);
 		if (feof(stdin)) /*checking for end of file*/
@@ -72,6 +71,12 @@ int main(void)
 		b[characters - 1] = '\0';
 		strtoking(argv, b);
 
+		if (!strcmp(argv[0], "exit"))
+		{
+			free(b);
+			return (0);
+		}
+
 		if (stat(argv[0], &istat))/*checking if file exists*/
 		{
 			fprintf(stderr, "No such file or directory\n");
@@ -80,8 +85,6 @@ int main(void)
 		processID = fork();
 		if (!processID)/*evaluates to true in fork's child*/
 		{
-
-			printf("%s", argv[0]);
 			execve(argv[0], argv, environ);
 			perror("execve");
 			return (0);
