@@ -23,6 +23,7 @@ int main(void)
 	size_t bufSize = 1000;
 	size_t characters;
 	int processID;
+	struct stat i;/*for usage with stat to check if file exists*/
 	while (true)
 	{
 		printf("$ ");
@@ -32,16 +33,16 @@ int main(void)
 			free(b);
 			return (0);
 		}
+		b[characters - 1] = '\0';
+		if (stat(b, &i))/*checking if file exists*/
+		{
+			fprintf(stderr, "No such file or directory\n");
+			continue;
+		}
 		processID = fork();
 		if (!processID)
 		{
-			struct stat i;/*for usage with stat to check if file exists*/
-			b[characters - 1] = '\0';
-			if (stat(b, &i))/*checking if file exists*/
-			{
-				fprintf(stderr, "No such file or directory\n");
-				continue;
-			}
+
 			char *argv[] = {b, 0};
 			printf("%s", b);
 			execve(b, &argv, environ);
