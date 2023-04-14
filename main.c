@@ -40,7 +40,7 @@ int main(void)
 			continue;
 		}
 		processID = fork();
-		if (!processID)
+		if (!processID)/*evaluates to true in fork's child*/
 		{
 
 			char *argv[] = {b, 0};
