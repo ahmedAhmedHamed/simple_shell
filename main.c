@@ -30,7 +30,7 @@ int _strlen(const char *s)
 /**
  * printenv - ...
  */
-void printenv()/*unfinished*/
+void printenv()
 {
 	extern char **environ;
 	int i;
