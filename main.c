@@ -1,12 +1,13 @@
-//
-// Created by vboxuser on 14/04/23.
-//
+/**
+ *  Created by Stan on 14/04/23.
+ */
 
 #include <stdio.h>
 #include <stdbool.h>
 #include <unistd.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
+#include <stdlib.h>
 #include "main.h"
 
 /**
@@ -16,24 +17,27 @@
 int main(void)
 {
 	int waitID;
+	extern char **environ;
+	char buffer[1000];
+	char *b = buffer;
+	size_t bufSize = 1000;
+	size_t characters;
+	int processID;
 	while (true)
 	{
-		char buffer[1000];
-		char *b = buffer;
-		size_t bufSize = 1000;
-		size_t characters;
-		int processID;
 		printf("$ ");
 		characters = getline(&b, &bufSize,  stdin);
 		if (feof(stdin)) /*checking for end of file*/
+		{
+			free(b);
 			return (0);
+		}
 		processID = fork();
 		if (!processID)
 		{
-			struct stat i;
+			struct stat i;/*for usage with stat to check if file exists*/
 			b[characters - 1] = '\0';
-			extern char **environ;
-			if (stat(b, &i))
+			if (stat(b, &i))/*checking if file exists*/
 			{
 				fprintf(stderr, "No such file or directory\n");
 				continue;
