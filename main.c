@@ -28,7 +28,7 @@ int _strlen(const char *s)
 }
 
 /**
- * printenv - ...
+ * printenv - prints everything that's inside the environ variable
  */
 void printenv()
 {
@@ -44,13 +44,12 @@ void printenv()
  * @argv: to
  * @b: from
  */
-void strtoking(char *argv[10], char *b)
+void strtoking(char *argv[10], const char *b)
 {
 	int i = 0;
 	int j = 0;
 	int k = 0;
 	int l = 0;
-	int flag = 0;
 	char *token;
 	while (b[i] != '\0')
 	{
@@ -58,8 +57,6 @@ void strtoking(char *argv[10], char *b)
 		while (b[i] != ' ' && b[i] != '\0')
 			i++;
 			argv[k] = malloc(sizeof(char) * ((i - j) + 1));
-		flag = 1;
-
 		while (i != j)
 		{
 			argv[k][l] = b[j];
@@ -70,7 +67,6 @@ void strtoking(char *argv[10], char *b)
 		k++;
 		i++;
 		j = i;
-
 	}
 }
 
