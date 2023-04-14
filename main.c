@@ -40,20 +40,37 @@ void printenv()
 
 /**
  * strtoking - separates b into argv using a space as a delimiter
- * @argv: ...
- * @b: ...
+ * it allocates new memory to each one of the argv arguments
+ * @argv: to
+ * @b: from
  */
 void strtoking(char *argv[10], char *b)
 {
 	int i = 0;
+	int j = 0;
+	int k = 0;
+	int l = 0;
+	int flag = 0;
 	char *token;
-	token = strtok(b, " ");
-	/* walk through other tokens */
-	while( token != NULL )
+	while (b[i] != '\0')
 	{
-		argv[i] = token;
+		l = 0;
+		while (b[i] != ' ' && b[i] != '\0')
+			i++;
+			argv[k] = malloc(sizeof(char) * ((i - j) + 1));
+		flag = 1;
+
+		while (i != j)
+		{
+			argv[k][l] = b[j];
+			j++;
+			l++;
+		}
+		argv[k][l] = '\0';
+		k++;
 		i++;
-		token = strtok(NULL, " ");
+		j = i;
+
 	}
 }
 
