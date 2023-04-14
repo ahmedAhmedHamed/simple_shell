@@ -8,7 +8,38 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 #include <stdlib.h>
+#include <string.h>
 #include "main.h"
+
+/**
+ * _strlen - helo
+ * @s: s
+ * Return: s
+ */
+int _strlen(const char *s)
+{
+	int len;
+	if (s == 0)
+		return (-1);
+	len = 0;
+	while (s[len] != '\0')
+		len++;
+	return (len);
+}
+
+void strtoking(char *argv[10], char *b)
+{
+	int i = 0;
+	char *token;
+	token = strtok(b, " ");
+	/* walk through other tokens */
+	while( token != NULL )
+	{
+		argv[i] = token;
+		i++;
+		token = strtok(NULL, " ");
+	}
+}
 
 /**
  * main - hello
@@ -23,9 +54,14 @@ int main(void)
 	size_t bufSize = 1000;
 	size_t characters;
 	int processID;
-	struct stat i;/*for usage with stat to check if file exists*/
+	struct stat istat;/*for usage with stat to check if file exists*/
+	char *argv[10];
+	int i = 0;
 	while (true)
 	{
+		for (i = 0; i < 10; i++)
+			argv[i] = NULL;
+		i = 0;
 		printf("$ ");
 		characters = getline(&b, &bufSize,  stdin);
 		if (feof(stdin)) /*checking for end of file*/
@@ -34,7 +70,9 @@ int main(void)
 			return (0);
 		}
 		b[characters - 1] = '\0';
-		if (stat(b, &i))/*checking if file exists*/
+		strtoking(argv, b);
+
+		if (stat(argv[0], &istat))/*checking if file exists*/
 		{
 			fprintf(stderr, "No such file or directory\n");
 			continue;
@@ -43,9 +81,8 @@ int main(void)
 		if (!processID)/*evaluates to true in fork's child*/
 		{
 
-			char *argv[] = {b, 0};
-			printf("%s", b);
-			execve(b, &argv, environ);
+			printf("%s", argv[0]);
+			execve(argv[0], argv, environ);
 			perror("execve");
 			return (0);
 		}
