@@ -27,6 +27,25 @@ int _strlen(const char *s)
 	return (len);
 }
 
+/**
+ * printenv - ...
+ */
+void printenv()/*unfinished*/
+{
+	extern char **environ;
+	int i = 0;
+	while (environ != NULL && *environ != NULL)
+	{
+		printf("%s", environ[i]);
+		i++;
+	}
+}
+
+/**
+ * strtoking - separates b into argv using a space as a delimiter
+ * @argv: ...
+ * @b: ...
+ */
 void strtoking(char *argv[10], char *b)
 {
 	int i = 0;
@@ -69,12 +88,18 @@ int main(void)
 			return (0);
 		}
 		b[characters - 1] = '\0';
-		strtoking(argv, b);
+		strtoking(argv, b);/*separating string into tokens into argv*/
 
 		if (!strcmp(argv[0], "exit"))
 		{
 			free(b);
 			return (0);
+		}
+
+		if (!strcmp(argv[0], "env"))
+		{
+			printenv();
+			continue;
 		}
 
 		if (stat(argv[0], &istat))/*checking if file exists*/
