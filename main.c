@@ -9,6 +9,7 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 #include <string.h>
+#define BUFSIZE 1024
 #include "main.h"
 
 /**
@@ -50,7 +51,6 @@ void strtoking(char *argv[10], const char *b)
 	int j = 0;
 	int k = 0;
 	int l = 0;
-	char *token;
 	while (b[i] != '\0')
 	{
 		l = 0;
@@ -76,11 +76,12 @@ void strtoking(char *argv[10], const char *b)
  */
 int main(void)
 {
+	int returnNum;
 	int waitID;
 	extern char **environ;
-	char buffer[1000];
+	char buffer[BUFSIZE];
 	char *b = buffer;/*necessary for usage with getline*/
-	size_t bufSize = 1000;/*TODO dont forget that this is linked to buffer*/
+	size_t bufSize = BUFSIZE;
 	size_t characters;
 	int processID;
 	struct stat istat;/*for usage with stat to check if file exists*/
@@ -103,7 +104,10 @@ int main(void)
 		if (!strcmp(argv[0], "exit"))
 		{
 			free(b);
-			return (0);
+			if (argv[1] != NULL)
+				return (atoi(argv[1]));
+			else
+				return (0);
 		}
 
 		if (!strcmp(argv[0], "env"))
