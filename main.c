@@ -76,7 +76,7 @@ void strtoking(char *argv[10], const char *b)
  */
 int main(void)
 {
-	int returnNum;
+	int errorCatcher;
 	int waitID;
 	extern char **environ;
 	char buffer[BUFSIZE];
@@ -115,6 +115,21 @@ int main(void)
 			printenv();
 			continue;
 		}
+
+        if (!strcmp(argv[0], "setenv"))
+        {
+            if (argv[1] == NULL || argv[2] == NULL)
+            {
+                fprintf(stderr, "not enough arguments\n");
+                continue;
+            }
+
+            errorCatcher = setenv(argv[1], argv[2], 1);
+
+            if (errorCatcher == -1)
+                fprintf(stderr, "setenv failed\n");
+            continue;
+        }
 
 		if (stat(argv[0], &istat))/*checking if file exists*/
 		{
