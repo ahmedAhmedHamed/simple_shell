@@ -152,6 +152,20 @@ int main(void)
 			continue;
 		}
 
+		if (!strcmp(argv[0], "cd"))
+		{
+			if (argv[1] == NULL)
+			{
+				fprintf(stderr, "Not enough arguments\n");
+				continue;
+			}
+			errorCatcher = chdir(argv[1]);
+			if (errorCatcher == -1)
+				fprintf(stderr, "Chdir failed\n");
+
+			continue;
+		}
+
 		if (stat(argv[0], &istat))/*checking if file exists*/
 		{
 			fprintf(stderr, "No such file or directory\n");
