@@ -73,7 +73,25 @@ void strtoking(char *argv[10], const char *b)
 
 void _setenv(char *argv[10])
 {
+	int errorCatcher;
+	if (argv[1] == NULL || argv[2] == NULL)
+	{
+		fprintf(stderr, "not enough arguments\n");
+		return;
+	}
 
+	errorCatcher = setenv(argv[1], argv[2], 1);
+
+	if (errorCatcher == -1)
+		fprintf(stderr, "setenv failed\n");
+}
+
+void _unsetenv(char *argv[10])
+{
+	int errorCatcher;
+	errorCatcher = unsetenv(argv[1]);
+	if (errorCatcher == -1)
+		fprintf(stderr, "unsetenv failed :(\n");
 }
 
 /**
@@ -124,15 +142,13 @@ int main(void)
 
 		if (!strcmp(argv[0], "setenv"))
 		{
-			if (argv[1] == NULL || argv[2] == NULL)
-			{
-				fprintf(stderr, "not enough arguments\n");
-				continue;
-			}
+			_setenv(argv);
+			continue;
+		}
 
-			errorCatcher = setenv(argv[1], argv[2], 1);
-			if (errorCatcher == -1)
-				fprintf(stderr, "setenv failed\n");
+		if (!strcmp(argv[0], "unsetenv"))
+		{
+			_unsetenv(argv);
 			continue;
 		}
 
