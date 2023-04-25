@@ -152,13 +152,15 @@ int main(void)
 			continue;
 		}
 
-		if (!strcmp(argv[0], "cd"))
+		if (!strcmp(argv[0], "cd"))/*likely need to handle $VARIABLE*/
 		{
-			if (argv[1] == NULL)
+			if (argv[1] == NULL)/*could be wrong, if 1 is null should go home*/
 			{
 				fprintf(stderr, "Not enough arguments\n");
 				continue;
 			}
+			if (argv[1][0] == '-' || argv[1][0] == '~')
+				argv[1][0] = '/';
 			errorCatcher = chdir(argv[1]);
 			if (errorCatcher == -1)
 				fprintf(stderr, "Chdir failed\n");
