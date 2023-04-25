@@ -37,6 +37,7 @@ void printenv()
 	int i;
 	for (i = 0; environ[i] != NULL; i++)
 		printf("\n%s", environ[i]);
+	printf("\n");
 }
 
 /**
@@ -56,7 +57,7 @@ void strtoking(char *argv[10], const char *b)
 		l = 0;
 		while (b[i] != ' ' && b[i] != '\0')
 			i++;
-			argv[k] = malloc(sizeof(char) * ((i - j) + 1));
+		argv[k] = malloc(sizeof(char) * ((i - j) + 1));
 		while (i != j)
 		{
 			argv[k][l] = b[j];
@@ -68,6 +69,11 @@ void strtoking(char *argv[10], const char *b)
 		i++;
 		j = i;
 	}
+}
+
+void _setenv(char *argv[10])
+{
+
 }
 
 /**
@@ -116,20 +122,19 @@ int main(void)
 			continue;
 		}
 
-        if (!strcmp(argv[0], "setenv"))
-        {
-            if (argv[1] == NULL || argv[2] == NULL)
-            {
-                fprintf(stderr, "not enough arguments\n");
-                continue;
-            }
+		if (!strcmp(argv[0], "setenv"))
+		{
+			if (argv[1] == NULL || argv[2] == NULL)
+			{
+				fprintf(stderr, "not enough arguments\n");
+				continue;
+			}
 
-            errorCatcher = setenv(argv[1], argv[2], 1);
-
-            if (errorCatcher == -1)
-                fprintf(stderr, "setenv failed\n");
-            continue;
-        }
+			errorCatcher = setenv(argv[1], argv[2], 1);
+			if (errorCatcher == -1)
+				fprintf(stderr, "setenv failed\n");
+			continue;
+		}
 
 		if (stat(argv[0], &istat))/*checking if file exists*/
 		{
