@@ -56,22 +56,15 @@ build CMakeFiles/simple_shell.dir/main.c.o: C_COMPILER__simple_shell_Debug /home
   OBJECT_DIR = CMakeFiles/simple_shell.dir
   OBJECT_FILE_DIR = CMakeFiles/simple_shell.dir
 
-build CMakeFiles/simple_shell.dir/functions.c.o: C_COMPILER__simple_shell_Debug /home/vboxuser/simple_shell/functions.c || cmake_object_order_depends_target_simple_shell
-  DEP_FILE = CMakeFiles/simple_shell.dir/functions.c.o.d
-  FLAGS = -g -fdiagnostics-color=always -std=gnu11
-  INCLUDES = -I/home/vboxuser/simple_shell/.
-  OBJECT_DIR = CMakeFiles/simple_shell.dir
-  OBJECT_FILE_DIR = CMakeFiles/simple_shell.dir
-
-build CMakeFiles/simple_shell.dir/separatedMain.c.o: C_COMPILER__simple_shell_Debug /home/vboxuser/simple_shell/separatedMain.c || cmake_object_order_depends_target_simple_shell
-  DEP_FILE = CMakeFiles/simple_shell.dir/separatedMain.c.o.d
-  FLAGS = -g -fdiagnostics-color=always -std=gnu11
-  INCLUDES = -I/home/vboxuser/simple_shell/.
-  OBJECT_DIR = CMakeFiles/simple_shell.dir
-  OBJECT_FILE_DIR = CMakeFiles/simple_shell.dir
-
 build CMakeFiles/simple_shell.dir/utilities.c.o: C_COMPILER__simple_shell_Debug /home/vboxuser/simple_shell/utilities.c || cmake_object_order_depends_target_simple_shell
   DEP_FILE = CMakeFiles/simple_shell.dir/utilities.c.o.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu11
+  INCLUDES = -I/home/vboxuser/simple_shell/.
+  OBJECT_DIR = CMakeFiles/simple_shell.dir
+  OBJECT_FILE_DIR = CMakeFiles/simple_shell.dir
+
+build CMakeFiles/simple_shell.dir/functions.c.o: C_COMPILER__simple_shell_Debug /home/vboxuser/simple_shell/functions.c || cmake_object_order_depends_target_simple_shell
+  DEP_FILE = CMakeFiles/simple_shell.dir/functions.c.o.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu11
   INCLUDES = -I/home/vboxuser/simple_shell/.
   OBJECT_DIR = CMakeFiles/simple_shell.dir
@@ -85,7 +78,7 @@ build CMakeFiles/simple_shell.dir/utilities.c.o: C_COMPILER__simple_shell_Debug 
 #############################################
 # Link the executable simple_shell
 
-build simple_shell: C_EXECUTABLE_LINKER__simple_shell_Debug CMakeFiles/simple_shell.dir/main.c.o CMakeFiles/simple_shell.dir/functions.c.o CMakeFiles/simple_shell.dir/separatedMain.c.o CMakeFiles/simple_shell.dir/utilities.c.o
+build simple_shell: C_EXECUTABLE_LINKER__simple_shell_Debug CMakeFiles/simple_shell.dir/main.c.o CMakeFiles/simple_shell.dir/utilities.c.o CMakeFiles/simple_shell.dir/functions.c.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/simple_shell.dir
   POST_BUILD = :

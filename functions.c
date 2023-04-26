@@ -14,58 +14,36 @@ void printenv(void)
 	}
 }
 
-
-
 /**
- * strtoking - separates b into argv using a space as a delimiter
- * it allocates new memory to each one of the argv arguments
- * @argv: to
- * @b: from
- */
-void strtoking(char *argv[10], char *b)
-{
-	int i = 0;
-	char *token;
-
-	token = strtok(b, " ");
-	/* walk through other tokens */
-	while (token != NULL)
-	{
-		argv[i] = token;
-		i++;
-		token = strtok(NULL, " ");
-	}
-}
-
-/**
- * _setenv - setenv
- * @argv: hello
- */
-void _setenv(char *argv[10])
-{
-	int errorCatcher;
-
-	if (argv[1] == NULL || argv[2] == NULL)
-	{
-		write(STDERR_FILENO, "not enough arguments\n", 21);
-		return;
-	}
-
-	errorCatcher = setenv(argv[1], argv[2], 1);
-
-	if (errorCatcher == -1)
-		write(STDERR_FILENO, "setenv failed\n", _strlen("setenv failed\n"));
-}
-
-/**
- * _unsetenv - unsetenv
+ * setupInput - prints the "$ ", clears argv and takes input into b
  * @argv: argv
+ * @b: other string
+ * Return: number of characters read from input
  */
-void _unsetenv(char *argv[10])
+int setupInput(char *_argv[10], char **b)
 {
-	int errorCatcher;
+	int characters;
+	int i;
+	size_t bufSize = 0;
 
-	errorCatcher = unsetenv(argv[1]);
-	if (errorCatcher == -1)
-		write(STDERR_FILENO, "unsetenv failed\n", _strlen("unsetenv failed\n"));
+	for (i = 0; i < 10; i++)
+		_argv[i] = NULL;
+
+	write(STDIN_FILENO, "$ ", 2);
+	characters = getline(b, &bufSize,  stdin);
+	return (characters);
+}
+
+int fileExists(char *nextArgv[10])
+{
+	struct stat istat;
+
+	if (stat(nextArgv[0], &istat))/*checking if file exists*/
+	{
+		write(1, nextArgv[0], _strlen(nextArgv[0]));
+		write(STDERR_FILENO, ": No such file or directory\n", 28);
+		frees(nextArgv);
+		return (1);
+	}
+	return (0);
 }
