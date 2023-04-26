@@ -3,7 +3,7 @@
 /**
  * et3amel - handles special case of input being piped into program
  * @argv: ...
- * @Return: 1 if forked, 0 else.
+ * Return: 1 if forked, 0 else.
  */
 int et3amel(char *argv[])
 {

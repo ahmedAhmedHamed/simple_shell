@@ -8,6 +8,7 @@
 int _strlen(const char *s)
 {
 	int len;
+
 	if (s == 0)
 		return (-1);
 	len = 0;
@@ -26,14 +27,14 @@ void changeDir(char *argv[10])
 
 	if (argv[1] == NULL)/*could be wrong, if 1 is null should go home*/
 	{
-		write(STDERR_FILENO, "Not enough arguments\n",22);
+		write(STDERR_FILENO, "Not enough arguments\n", 22);
 		return;
 	}
 	if (argv[1][0] == '-' || argv[1][0] == '~')
 		argv[1][0] = '/';
 	errorCatcher = chdir(argv[1]);
 	if (errorCatcher == -1)
-		write(STDERR_FILENO, "Chdir failed\n",14);
+		write(STDERR_FILENO, "Chdir failed\n", 14);
 }
 
 /**
@@ -95,7 +96,7 @@ int setupInput(char *argv[10], char **b)
 
 	for (i = 0; i < 10; i++)
 		argv[i] = NULL;
-	write(STDIN_FILENO,"#cisfun$ ",10);
+	write(STDIN_FILENO, "#cisfun$ ", 10);
 	characters = getline(b, &bufSize,  stdin);
 	return (characters);
 }

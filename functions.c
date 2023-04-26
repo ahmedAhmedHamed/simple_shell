@@ -22,7 +22,8 @@ void printenv(void)
 void frees(char *_argv[10])
 {
 	int i = 0;
-	while(_argv[i] != NULL)
+
+	while (_argv[i] != NULL)
 	{
 		if (_argv[i] != NULL)
 		{
@@ -43,9 +44,10 @@ void strtoking(char *argv[10], char *b)
 {
 	int i = 0;
 	char *token;
+
 	token = strtok(b, " ");
 	/* walk through other tokens */
-	while( token != NULL )
+	while (token != NULL)
 	{
 		argv[i] = token;
 		i++;
@@ -63,7 +65,7 @@ void _setenv(char *argv[10])
 
 	if (argv[1] == NULL || argv[2] == NULL)
 	{
-		write(STDERR_FILENO, "not enough arguments\n", _strlen("not enough arguments\n"));
+		write(STDERR_FILENO, "not enough arguments\n", 21);
 		return;
 	}
 
