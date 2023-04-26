@@ -32,7 +32,7 @@ int et3amel(char *argv[])
 int main(int argc, char *argv[])
 {
 	int waitID;
-	char *b = malloc(1024 * sizeof(char));/*necessary for usage with getline*/
+	char *b = malloc(BUFSIZE * sizeof(char));/*necessary for usage with getline*/
 	size_t characters = argc;
 	int processID;
 	struct stat istat;
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 		if (!processID)
 		{
 			et3amel(argv);
-			free (b);
+			frees(argv, b);
 			return (-1);
 		}
 	}
@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
 		characters = setupInput(_argv, b);
 		if (feof(stdin)) /*checking for end of file*/
 		{
-			free (b);
+			frees(argv, b);
 			return (0);
 		}
 		formatString(characters, _argv, b);
@@ -61,24 +61,24 @@ int main(int argc, char *argv[])
 		{
 			if (_argv[1] != NULL)
 			{
-				free (b);
+				frees(argv, b);
 				return (atoi(_argv[1]));
 			}
 			else
 			{
-				free (b);
+				frees(argv, b);
 				return (0);
 			}
 		}
 		if (checkFunctions(_argv))
 		{
-			free (b);
+			frees(argv, b);
 			continue;
 		}
 		if (stat(_argv[0], &istat))/*checking if file exists*/
 		{/*error message likely needs to be changed*/
 			fprintf(stderr, "%s: No such file or directory\n", argv[0]);
-			free (b);
+			frees(argv, b);
 			continue;
 		}
 		processID = fork();
@@ -86,10 +86,10 @@ int main(int argc, char *argv[])
 		{
 			execve(_argv[0], _argv, environ);
 			perror("execve");
-			free (b);
+			frees(argv, b);
 			return (0);
 		}
-		free (b);
+		frees(argv, b);
 		wait(&waitID);
 	}
 }

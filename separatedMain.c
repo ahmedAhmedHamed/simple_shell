@@ -83,3 +83,14 @@ int setupInput(char *argv[10], char *b)
 	characters = getline(&b, &bufSize,  stdin);
 	return (characters);
 }
+
+void frees(char *argv[10], char *b)
+{
+	int i = 0;
+	while(argv[i] != NULL)
+	{
+		free(argv[i]);
+		i++;
+	}
+	free(b);
+}
