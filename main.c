@@ -1,89 +1,116 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <sys/wait.h>
+#include <stdlib.h>
+#include <string.h>
 #include "main.h"
 
 /**
- * et3amel - handles special case of input being piped into program
- * @argv: ...
- * Return: 1 if forked, 0 else.
+ * _strlen - helo
+ * @s: s
+ * Return: s
  */
-int et3amel(char *argv[])
+int _strlen(const char *s)
 {
-	int processID;
-	struct stat istat;
-	char *argv2[1] = {0};
-
-	if (stat(argv[1], &istat))/*checking if file exists*/
-	{/*error message likely needs to be changed*/
-		write(STDERR_FILENO, "No such file or directory\n", 26);
-		return (0);
-	}
-
-	processID = fork();
-	if (!processID)/*evaluates to true in fork's child*/
-	{
-		execve(argv[0], argv2, environ);
-		perror("execve");
-		return (1);
-	}
-	return (1);
+	int len;
+	if (s == 0)
+		return (-1);
+	len = 0;
+	while (s[len] != '\0')
+		len++;
+	return (len);
 }
 
 /**
- * main - simple shell
- * @argc: ...
- * @argv: ...
- * Return: exit code
+ * printenv - ...
  */
-int main(int argc, char *argv[])
+void printenv()
 {
 	int i;
-	int waitID = argc;
-	char *b = NULL;/*necessary for usage with getline*/
+
+	for (i = 0; environ[i] != NULL; i++)
+	{
+		write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
+		write(STDOUT_FILENO, "\n", 1);
+	}
+}
+
+/**
+ * strtoking - separates b into argv using a space as a delimiter
+ * @argv: ...
+ * @b: ...
+ */
+void strtoking(char *argv[10], char *b)
+{
+	int i = 0;
+	char *token;
+	token = strtok(b, " ");
+	/* walk through other tokens */
+	while( token != NULL )
+	{
+		argv[i] = token;
+		i++;
+		token = strtok(NULL, " ");
+	}
+}
+
+/**
+ * main - hello
+ * Return: exit code
+ */
+int main(void)
+{
+	int waitID;
+	extern char **environ;
+	char buffer[1000];
+	char *b = buffer;/*necessary for usage with getline*/
+	size_t bufSize = 1000;/*TODO dont forget that this is linked to buffer*/
 	size_t characters;
 	int processID;
-	struct stat istat;
-	char *_argv[10];/*TODO change if too low*/
-	if (argv[1])
-	{
-		processID = fork();
-		wait(&waitID);
-		if (!processID)
-		{
-			et3amel(argv);
-			frees(_argv);
-			return (-1);
-		}
-	}
+	struct stat istat;/*for usage with stat to check if file exists*/
+	char *argv[10];/*TODO change if too low*/
+	int i = 0;
 	while (true)
 	{
 		for (i = 0; i < 10; i++)
-			_argv[i] = NULL;
-		characters = setupInput(&b);
-		formatString(characters, _argv, b);
-		if (isEqual(_argv[0], "exit"))/*not with arguments*/
+			argv[i] = NULL;
+		printf("$ ");
+		characters = getline(&b, &bufSize,  stdin);
+		if (feof(stdin)) /*checking for end of file*/
 		{
-			frees(_argv);
+			free(b);
 			return (0);
 		}
-		if (checkFunctions(_argv))
+		b[characters - 1] = '\0';
+		strtoking(argv, b);/*separating string into tokens into argv*/
+
+		if (!strcmp(argv[0], "exit"))
 		{
-			frees(_argv);
+			free(b);
+			return (0);
+		}
+
+		if (!strcmp(argv[0], "env"))
+		{
+			printenv();
 			continue;
 		}
-		if (stat(_argv[0], &istat))/*checking if file exists*/
-		{/*error message likely needs to be changed*/
-			write(1, argv[0], _strlen(argv[0]));
-			write(STDERR_FILENO, ": No such file or directory\n", 28);
-			frees(_argv);
+
+		if (stat(argv[0], &istat))/*checking if file exists*/
+		{
+			fprintf(stderr, "No such file or directory\n");
 			continue;
 		}
 		processID = fork();
 		if (!processID)/*evaluates to true in fork's child*/
 		{
-			execve(_argv[0], _argv, environ);
+			execve(argv[0], argv, environ);
 			perror("execve");
 			return (0);
 		}
-		frees(_argv);
 		wait(&waitID);
 	}
+	return (0);
 }
