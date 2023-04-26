@@ -35,6 +35,7 @@ int et3amel(char *argv[])
  */
 int main(int argc, char *argv[])
 {
+	int i;
 	int waitID = argc;
 	char *b = NULL;/*necessary for usage with getline*/
 	size_t characters;
@@ -54,6 +55,8 @@ int main(int argc, char *argv[])
 	}
 	while (true)
 	{
+		for (i = 0; i < 10; i++)
+			_argv[i] = NULL;
 		characters = setupInput(_argv, &b);
 		formatString(characters, _argv, b);
 		if (isEqual(_argv[0], "exit"))/*not with arguments*/

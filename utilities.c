@@ -17,3 +17,18 @@ int isEqual(char *one, char *two)
 	}
 	return (1);
 }
+
+/**
+ * frees - frees _argv
+ * @_argv: Array to be freed
+ */
+void frees(char *_argv[10])
+{
+	int i = 0;
+	while (_argv != NULL && _argv[i] != NULL)
+	{
+		free(_argv[i]);
+		_argv[i] = NULL;
+		i++;
+	}
+}

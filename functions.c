@@ -14,24 +14,7 @@ void printenv(void)
 	}
 }
 
-/**
- * frees - frees _argv
- * @_argv: Array to be freed
- */
-void frees(char *_argv[10])
-{
-	int i = 0;
 
-	while (_argv[i] != NULL)
-	{
-		if (_argv[i] != NULL)
-		{
-			free(_argv[i]);
-			_argv[i] = NULL;
-		}
-		i++;
-	}
-}
 
 /**
  * strtoking - separates b into argv using a space as a delimiter
