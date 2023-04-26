@@ -1,0 +1,21 @@
+# ninja log v5
+0	23	1682549437390617566	CMakeFiles/simple_shell.dir/main.c.o	d4d232155ebc6b2c
+0	34	1682549437402617516	CMakeFiles/simple_shell.dir/utilities.c.o	6b4d3fa05294ec22
+0	37	1682549437406617499	CMakeFiles/simple_shell.dir/functions.c.o	782e1ad7aca924d1
+37	52	1682549437418617448	simple_shell	e4d490ceb2288915
+0	27	1682549543858164081	CMakeFiles/simple_shell.dir/utilities.c.o	6b4d3fa05294ec22
+0	27	1682549543858164081	CMakeFiles/simple_shell.dir/main.c.o	d4d232155ebc6b2c
+1	29	1682549543862164064	CMakeFiles/simple_shell.dir/functions.c.o	782e1ad7aca924d1
+29	45	1682549543878163995	simple_shell	e4d490ceb2288915
+0	27	1682549672685607909	CMakeFiles/simple_shell.dir/main.c.o	d4d232155ebc6b2c
+1	28	1682549672689607891	CMakeFiles/simple_shell.dir/functions.c.o	782e1ad7aca924d1
+28	41	1682549672705607821	simple_shell	e4d490ceb2288915
+1	25	1682549721485395512	CMakeFiles/simple_shell.dir/main.c.o	d4d232155ebc6b2c
+25	40	1682549721505395423	simple_shell	e4d490ceb2288915
+1	23	1682549874172726110	CMakeFiles/simple_shell.dir/main.c.o	d4d232155ebc6b2c
+23	38	1682549874184726057	simple_shell	e4d490ceb2288915
+0	22	1682549964124328825	CMakeFiles/simple_shell.dir/main.c.o	d4d232155ebc6b2c
+23	38	1682549964140328754	simple_shell	e4d490ceb2288915
+0	25	1682550411634331308	CMakeFiles/simple_shell.dir/main.c.o	d4d232155ebc6b2c
+1	28	1682550411634331308	CMakeFiles/simple_shell.dir/utilities.c.o	6b4d3fa05294ec22
+28	49	1682550411654331218	simple_shell	e4d490ceb2288915

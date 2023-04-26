@@ -29,7 +29,7 @@ int setupInput(char *_argv[10], char **b)
 	for (i = 0; i < 10; i++)
 		_argv[i] = NULL;
 
-	write(STDIN_FILENO, "$ ", 2);
+	write(STDOUT_FILENO, "$ ", 2);
 	characters = getline(b, &bufSize,  stdin);
 	return (characters);
 }

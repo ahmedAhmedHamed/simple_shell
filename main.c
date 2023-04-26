@@ -18,15 +18,11 @@ int main(int argc, char *argv[10])
 	while (true)
 	{
 		characters = setupInput(nextArgv, &b);
-		if (feof(stdin)) /*checking for end of file*/
-		{
-			frees(nextArgv);
-			return (0);
-		}
 		formatString(characters, nextArgv, b);
 		if (isEqual(nextArgv[0], "exit"))
 		{
 			frees(nextArgv);
+			free(b);
 			return (0);
 		}
 		if (isEqual(nextArgv[0], "env"))
@@ -41,7 +37,6 @@ int main(int argc, char *argv[10])
 		{
 			execve(nextArgv[0], nextArgv, environ);
 			perror("execve");
-			frees(nextArgv);
 			return (0);
 		}
 		wait(&waitID);

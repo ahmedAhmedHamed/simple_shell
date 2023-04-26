@@ -58,14 +58,26 @@ int _strlen(const char *s)
 void strtoking(char *nextArgv[10], char *b)
 {
 	int i = 0;
-	char *token;
-	token = strtok(b, " ");
-	/* walk through other tokens */
-	while( token != NULL )
+	int j = 0;
+	int k = 0;
+	int l;
+
+	while (b[i] != '\0')
 	{
-		nextArgv[i] = token;
+		l = 0;
+		while (b[i] != ' ' && b[i] != '\0')
+			i++;
+		nextArgv[k] = malloc(sizeof(char) * ((i - j) + 1));
+		while (i != j)
+		{
+			nextArgv[k][l] = b[j];
+			j++;
+			l++;
+		}
+		nextArgv[k][l] = '\0';
+		k++;
 		i++;
-		token = strtok(NULL, " ");
+		j = i;
 	}
 }
 
