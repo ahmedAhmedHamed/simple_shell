@@ -8,7 +8,7 @@
  * @argv: ...
  * Return: exit code
  */
-int main(int argc, char *argv[10])
+int main(int argc, char *argv[], char *envp[])
 {
 	int waitID;
 	char *b = NULL;/*necessary for usage with getline*/
@@ -30,7 +30,7 @@ int main(int argc, char *argv[10])
 		}
 		if (isEqual(nextArgv[0], "env"))
 		{
-			printenv();
+			printenv(envp);
 			continue;
 		}
 		if (fileExists(nextArgv))
@@ -38,10 +38,13 @@ int main(int argc, char *argv[10])
 		processID = fork();
 		if (!processID)/*evaluates to true in fork's child*/
 		{
-			execve(nextArgv[0], nextArgv, environ);
+			execve(nextArgv[0], nextArgv, envp);
 			perror("execve");
 			return (0);
 		}
 		wait(&waitID);
+		frees(nextArgv);
+		free(b);
+		b = NULL;
 	}
 }
