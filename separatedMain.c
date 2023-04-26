@@ -1,6 +1,22 @@
 #include "main.h"
 
 /**
+ * _strlen - helo
+ * @s: s
+ * Return: s
+ */
+int _strlen(const char *s)
+{
+	int len;
+	if (s == 0)
+		return (-1);
+	len = 0;
+	while (s[len] != '\0')
+		len++;
+	return (len);
+}
+
+/**
  * changeDir - does cd
  * @argv: argv
  */

@@ -13,7 +13,7 @@ int et3amel(char *argv[])
 
 	if (stat(argv[1], &istat))/*checking if file exists*/
 	{/*error message likely needs to be changed*/
-		fprintf(stderr, "No such file or directory\n");
+		write(STDERR_FILENO, "No such file or directory\n", 26);
 		return (0);
 	}
 
@@ -81,7 +81,8 @@ int main(int argc, char *argv[])
 		}
 		if (stat(_argv[0], &istat))/*checking if file exists*/
 		{/*error message likely needs to be changed*/
-			fprintf(stderr, "%s: No such file or directory\n", argv[0]);
+			write(1, argv[0], _strlen(argv[0]));
+			write(STDERR_FILENO, ": No such file or directory\n", 28);
 			frees(_argv);
 			continue;
 		}

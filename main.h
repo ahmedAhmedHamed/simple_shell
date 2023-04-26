@@ -10,6 +10,7 @@
 extern char **environ;
 #define BUFSIZE 1024
 void _unsetenv(char *argv[10]);
+int _strlen(const char *s);
 void _setenv(char *argv[10]);
 void strtoking(char *argv[10], char *b);
 void printenv(void);
