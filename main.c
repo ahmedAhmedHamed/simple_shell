@@ -71,6 +71,10 @@ void strtoking(char *argv[10], const char *b)
 	}
 }
 
+/**
+ * _setenv - setenv
+ * @argv: hello
+ */
 void _setenv(char *argv[10])
 {
 	int errorCatcher;
@@ -86,6 +90,10 @@ void _setenv(char *argv[10])
 		fprintf(stderr, "setenv failed\n");
 }
 
+/**
+ * _unsetenv - unsetenv
+ * @argv: argv
+ */
 void _unsetenv(char *argv[10])
 {
 	int errorCatcher;
