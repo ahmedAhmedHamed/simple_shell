@@ -9,12 +9,10 @@ int main(void)
 	int waitID;
 	char buffer[BUFSIZE];
 	char *b = buffer;/*necessary for usage with getline*/
-	size_t bufSize = BUFSIZE;
 	size_t characters;
 	int processID;
 	struct stat istat;
 	char *argv[10];/*TODO change if too low*/
-	int i;
 
 	while (true)
 	{
