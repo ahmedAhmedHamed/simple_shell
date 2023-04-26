@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
 			continue;
 		if (stat(_argv[0], &istat))/*checking if file exists*/
 		{/*error message likely needs to be changed*/
-			fprintf(stderr, "No such file or directory\n");
+			fprintf(stderr, "%s: No such file or directory\n", argv[0]);
 			continue;
 		}
 		processID = fork();
