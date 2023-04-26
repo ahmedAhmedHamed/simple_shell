@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
 	{
 		for (i = 0; i < 10; i++)
 			_argv[i] = NULL;
-		characters = setupInput(_argv, &b);
+		characters = setupInput(&b);
 		formatString(characters, _argv, b);
 		if (isEqual(_argv[0], "exit"))/*not with arguments*/
 		{

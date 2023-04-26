@@ -88,12 +88,10 @@ void formatString(int characters, char *argv[10], char *b)
  * @b: other string
  * Return: number of characters read from input
  */
-int setupInput(char *argv[10], char **b)
+int setupInput(char **b)
 {
 	int characters;
-	int i;
 	size_t bufSize = 0;
-
 
 	write(STDIN_FILENO, "$ ", 2);
 	characters = getline(b, &bufSize,  stdin);

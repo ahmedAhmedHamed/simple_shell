@@ -17,7 +17,7 @@ void printenv(void);
 void changeDir(char *argv[10]);
 int checkFunctions(char *argv[10]);
 void formatString(int characters, char *argv[10], char *b);
-int setupInput(char *argv[10], char **b);
+int setupInput(char **b);
 int isEqual(char *one, char *two);
 void frees(char *argv[10]);
 #endif
