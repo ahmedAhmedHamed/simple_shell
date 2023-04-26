@@ -10,10 +10,11 @@ int main(int argc, char *argv[10])
 {
 	int waitID;
 	char *b = NULL;/*necessary for usage with getline*/
-	size_t bufSize = 1000;/*TODO dont forget that this is linked to buffer*/
 	size_t characters;
 	int processID;
 	char *nextArgv[10];
+	(void) argc;
+	(void) argv;
 
 	while (true)
 	{

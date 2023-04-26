@@ -8,7 +8,6 @@
 #include <stdlib.h>
 #include <string.h>
 extern char **environ;
-#define BUFSIZE 1024
 int isEqual(char *one, char *two);
 void frees(char *_argv[10]);
 int _strlen(const char *s);
