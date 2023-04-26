@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 	int waitID;
 	char buffer[BUFSIZE];
 	char *b = buffer;/*necessary for usage with getline*/
-	size_t characters;
+	size_t characters = argc;
 	int processID;
 	struct stat istat;
 	char *_argv[10];/*TODO change if too low*/
