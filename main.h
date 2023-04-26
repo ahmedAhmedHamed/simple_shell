@@ -13,7 +13,6 @@ void _unsetenv(char *argv[10]);
 void _setenv(char *argv[10]);
 void strtoking(char *argv[10], const char *b);
 void printenv(void);
-int _strlen(const char *s);
 void changeDir(char *argv[10]);
 int checkFunctions(char *argv[10]);
 void formatString(int characters, char *argv[10], char *b);

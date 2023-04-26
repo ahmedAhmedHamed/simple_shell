@@ -1,23 +1,6 @@
 #include "main.h"
 
 /**
- * _strlen - hello
- * @s: s
- * Return: s
- */
-int _strlen(const char *s)
-{
-	int len;
-
-	if (s == 0)
-		return (-1);
-	len = 0;
-	while (s[len] != '\0')
-		len++;
-	return (len);
-}
-
-/**
  * printenv - prints everything that's inside the environ variable
  */
 void printenv(void)

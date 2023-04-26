@@ -10,6 +10,21 @@ void move_argv_into__argv(char *argv[], char *_argv[10])
 	}
 }
 
+int et3amel(char *argv[])
+{
+	struct stat istat;
+	char *argv2[1] = {0};
+	if (stat(argv[1], &istat))/*checking if file exists*/
+	{/*error message likely needs to be changed*/
+		fprintf(stderr, "No such file or directory\n");
+		return (0);
+	}
+
+	execve(argv[1], argv2, environ);
+	perror("execve");
+	return (1);
+}
+
 /**
  * main - simple shell
  * Return: exit code
@@ -23,11 +38,19 @@ int main(int argc, char *argv[])
 	int processID;
 	struct stat istat;
 	char *_argv[10];/*TODO change if too low*/
-
+	if (argv[1])
+	{
+		processID = fork();
+		wait(&waitID);
+		if (!processID)
+		{
+			et3amel(argv);
+			return (-1);
+		}
+	}
 	while (true)
 	{
 		characters = setupInput(_argv, b);
-		move_argv_into__argv(argv, _argv);
 		if (feof(stdin)) /*checking for end of file*/
 			return (0);
 		formatString(characters, _argv, b);
