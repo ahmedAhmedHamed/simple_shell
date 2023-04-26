@@ -71,26 +71,29 @@ void formatString(int characters, char *argv[10], char *b)
  * @b: other string
  * Return: number of characters read from input
  */
-int setupInput(char *argv[10], char *b)
+int setupInput(char *argv[10], char **b)
 {
 	int characters;
 	int i;
-	size_t bufSize = BUFSIZE;
+	size_t bufSize = 0;
 
 	for (i = 0; i < 10; i++)
 		argv[i] = NULL;
 	printf("#cisfun$ ");
-	characters = getline(&b, &bufSize,  stdin);
+	characters = getline(b, &bufSize,  stdin);
 	return (characters);
 }
 
-void frees(char *argv[10], char *b)
+void frees(char *_argv[10], char *b)
 {
 	int i = 0;
-	while(argv[i] != NULL)
+	while(_argv[i] != NULL)
 	{
-		free(argv[i]);
+		if (_argv[i] != NULL)
+		{
+			free(_argv[i]);
+			_argv[i] = NULL;
+		}
 		i++;
 	}
-	free(b);
 }
