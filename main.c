@@ -55,11 +55,6 @@ int main(int argc, char *argv[])
 	while (true)
 	{
 		characters = setupInput(_argv, &b);
-		if (feof(stdin)) /*checking for end of file*/
-		{
-			frees(_argv);
-			return (0);
-		}
 		formatString(characters, _argv, b);
 		if (isEqual(_argv[0], "exit"))
 		{
