@@ -96,7 +96,7 @@ int setupInput(char *argv[10], char **b)
 
 	for (i = 0; i < 10; i++)
 		argv[i] = NULL;
-	write(STDIN_FILENO, "#cisfun$ ", 10);
+	write(STDIN_FILENO, "$ ", 2);
 	characters = getline(b, &bufSize,  stdin);
 	return (characters);
 }

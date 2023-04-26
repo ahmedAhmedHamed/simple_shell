@@ -16,3 +16,8 @@
 29	43	1682531257001247939	simple_shell	8b98181df951cef
 0	25	1682531263801214059	CMakeFiles/simple_shell.dir/functions.c.o	782e1ad7aca924d1
 25	42	1682531263813213999	simple_shell	8b98181df951cef
+0	28	1682531526263911140	CMakeFiles/simple_shell.dir/functions.c.o	782e1ad7aca924d1
+28	43	1682531526279911061	simple_shell	8b98181df951cef
+1	28	1682531603699528191	CMakeFiles/simple_shell.dir/separatedMain.c.o	fac6fdb2bb191cce
+0	29	1682531603703528172	CMakeFiles/simple_shell.dir/functions.c.o	782e1ad7aca924d1
+29	43	1682531603715528112	simple_shell	8b98181df951cef
