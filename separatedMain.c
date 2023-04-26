@@ -79,7 +79,7 @@ int setupInput(char *argv[10], char *b)
 
 	for (i = 0; i < 10; i++)
 		argv[i] = NULL;
-	printf("$ ");
+	printf("#cisfun$ ");
 	characters = getline(&b, &bufSize,  stdin);
 	return (characters);
 }

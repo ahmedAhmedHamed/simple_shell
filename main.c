@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 		if (checkFunctions(_argv))
 			continue;
 		if (stat(_argv[0], &istat))/*checking if file exists*/
-		{
+		{/*error message likely needs to be changed*/
 			fprintf(stderr, "No such file or directory\n");
 			continue;
 		}
