@@ -7,6 +7,7 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 #include <string.h>
+#include <signal.h>
 int isEqual(char *one, char *two);
 void frees(char *_argv[10]);
 int _strlen(const char *s);

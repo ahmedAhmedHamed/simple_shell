@@ -1,7 +1,13 @@
-
 #include "main.h"
 
+void SignalHandler(int sig)
+{
+	char *prompt = "\n$ ";
 
+	(void)sig;
+	signal(SIGINT, SignalHandler);
+	write(STDIN_FILENO, prompt, 3);
+}
 /**
  * main - hello
  * @argc: ...
@@ -20,6 +26,7 @@ int main(int argc, char *argv[], char *envp[])
 
 	while (true)
 	{
+		signal(SIGINT, SignalHandler);
 		characters = setupInput(nextArgv, &b);
 		formatString(characters, nextArgv, b);
 		if (isEqual(nextArgv[0], "exit"))
