@@ -16,7 +16,7 @@ void printenv(void)
 
 /**
  * setupInput - prints the "$ ", clears argv and takes input into b
- * @argv: argv
+ * @_argv: argv
  * @b: other string
  * Return: number of characters read from input
  */
@@ -34,6 +34,11 @@ int setupInput(char *_argv[10], char **b)
 	return (characters);
 }
 
+/**
+ * fileExists - returns 0 if file exists
+ * @nextArgv: ...
+ * Return: ...
+ */
 int fileExists(char *nextArgv[10])
 {
 	struct stat istat;

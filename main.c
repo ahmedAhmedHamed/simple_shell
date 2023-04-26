@@ -4,6 +4,8 @@
 
 /**
  * main - hello
+ * @argc: ...
+ * @argv: ...
  * Return: exit code
  */
 int main(int argc, char *argv[10])

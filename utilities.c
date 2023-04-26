@@ -26,6 +26,7 @@ int isEqual(char *one, char *two)
 void frees(char *_argv[10])
 {
 	int i = 0;
+
 	while (_argv != NULL && _argv[i] != NULL)
 	{
 		free(_argv[i]);
@@ -42,6 +43,7 @@ void frees(char *_argv[10])
 int _strlen(const char *s)
 {
 	int len;
+
 	if (s == 0)
 		return (-1);
 	len = 0;
