@@ -1,32 +1,36 @@
 #include "main.h"
 
-void move_argv_into__argv(char *argv[], char *_argv[10])
-{
-	int i = 0;
-	while (argv[i] != 0)
-	{
-		_argv[i] = argv[i];
-		i++;
-	}
-}
-
+/**
+ * et3amel - handles special case of input being piped into program
+ * @argv: ...
+ * @Return: 1 if forked, 0 else.
+ */
 int et3amel(char *argv[])
 {
+	int processID;
 	struct stat istat;
 	char *argv2[1] = {0};
+
 	if (stat(argv[1], &istat))/*checking if file exists*/
 	{/*error message likely needs to be changed*/
 		fprintf(stderr, "No such file or directory\n");
 		return (0);
 	}
 
-	execve(argv[1], argv2, environ);
-	perror("execve");
+	processID = fork();
+	if (!processID)/*evaluates to true in fork's child*/
+	{
+		execve(argv[0], argv2, environ);
+		perror("execve");
+		return (1);
+	}
 	return (1);
 }
 
 /**
  * main - simple shell
+ * @argc: ...
+ * @argv: ...
  * Return: exit code
  */
 int main(int argc, char *argv[])
