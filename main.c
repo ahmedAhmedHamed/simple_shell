@@ -56,18 +56,10 @@ int main(int argc, char *argv[])
 	{
 		characters = setupInput(_argv, &b);
 		formatString(characters, _argv, b);
-		if (isEqual(_argv[0], "exit"))
+		if (isEqual(_argv[0], "exit"))/*not with arguments*/
 		{
-			if (_argv[1] != NULL)
-			{
-				frees(_argv);
-				return (atoi(_argv[1]));
-			}
-			else
-			{
-				frees(_argv);
-				return (0);
-			}
+			frees(_argv);
+			return (0);
 		}
 		if (checkFunctions(_argv))
 		{
