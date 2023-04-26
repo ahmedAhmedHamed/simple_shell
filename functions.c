@@ -8,8 +8,29 @@ void printenv(void)
 	int i;
 
 	for (i = 0; environ[i] != NULL; i++)
-		printf("\n%s", environ[i]);
-	printf("\n");
+	{
+		write(STDOUT_FILENO, "\n", 1);
+		write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
+	}
+	write(STDOUT_FILENO, "\n", 1);
+}
+
+/**
+ * frees - frees _argv
+ * @_argv: Array to be freed
+ */
+void frees(char *_argv[10])
+{
+	int i = 0;
+	while(_argv[i] != NULL)
+	{
+		if (_argv[i] != NULL)
+		{
+			free(_argv[i]);
+			_argv[i] = NULL;
+		}
+		i++;
+	}
 }
 
 /**
@@ -42,14 +63,14 @@ void _setenv(char *argv[10])
 
 	if (argv[1] == NULL || argv[2] == NULL)
 	{
-		fprintf(stderr, "not enough arguments\n");
+		write(STDERR_FILENO, "not enough arguments\n", _strlen("not enough arguments\n"));
 		return;
 	}
 
 	errorCatcher = setenv(argv[1], argv[2], 1);
 
 	if (errorCatcher == -1)
-		fprintf(stderr, "setenv failed\n");
+		write(STDERR_FILENO, "setenv failed\n", _strlen("setenv failed\n"));
 }
 
 /**
@@ -62,5 +83,5 @@ void _unsetenv(char *argv[10])
 
 	errorCatcher = unsetenv(argv[1]);
 	if (errorCatcher == -1)
-		fprintf(stderr, "unsetenv failed :(\n");
+		write(STDERR_FILENO, "unsetenv failed\n", _strlen("unsetenv failed\n"));
 }

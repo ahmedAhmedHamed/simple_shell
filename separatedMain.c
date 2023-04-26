@@ -43,25 +43,25 @@ void changeDir(char *argv[10])
  */
 int checkFunctions(char *argv[10])
 {
-	if (!strcmp(argv[0], "env"))
+	if (isEqual(argv[0], "env"))
 	{
 		printenv();
 		return (1);
 	}
 
-	if (!strcmp(argv[0], "setenv"))
+	if (isEqual(argv[0], "setenv"))
 	{
 		_setenv(argv);
 		return (1);
 	}
 
-	if (!strcmp(argv[0], "unsetenv"))
+	if (isEqual(argv[0], "unsetenv"))
 	{
 		_unsetenv(argv);
 		return (1);
 	}
 
-	if (!strcmp(argv[0], "cd"))/*likely need to handle $VARIABLE*/
+	if (isEqual(argv[0], "cd"))/*likely need to handle $VARIABLE*/
 	{
 		changeDir(argv);
 		return (1);
@@ -98,18 +98,4 @@ int setupInput(char *argv[10], char **b)
 	write(STDIN_FILENO,"#cisfun$ ",10);
 	characters = getline(b, &bufSize,  stdin);
 	return (characters);
-}
-
-void frees(char *_argv[10])
-{
-	int i = 0;
-	while(_argv[i] != NULL)
-	{
-		if (_argv[i] != NULL)
-		{
-			free(_argv[i]);
-			_argv[i] = NULL;
-		}
-		i++;
-	}
 }

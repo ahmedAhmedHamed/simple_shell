@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
 			return (0);
 		}
 		formatString(characters, _argv, b);
-		if (!strcmp(_argv[0], "exit"))//strcmp is not allowed
+		if (isEqual(_argv[0], "exit"))
 		{
 			if (_argv[1] != NULL)
 			{
