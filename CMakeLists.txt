@@ -7,4 +7,4 @@ include_directories(.)
 
 add_executable(simple_shell
         main.c
-        main.h)
+        main.h functions.c separatedMain.c)
