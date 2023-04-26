@@ -126,16 +126,12 @@ int main(void)
 		printf("$ ");
 		characters = getline(&b, &bufSize,  stdin);
 		if (feof(stdin)) /*checking for end of file*/
-		{
-			free(b);
 			return (0);
-		}
 		b[characters - 1] = '\0';
 		strtoking(argv, b);/*separating string into tokens into argv*/
 
 		if (!strcmp(argv[0], "exit"))
 		{
-			free(b);
 			if (argv[1] != NULL)
 				return (atoi(argv[1]));
 			else
