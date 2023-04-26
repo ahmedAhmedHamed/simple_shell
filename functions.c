@@ -18,7 +18,7 @@ void printenv(void)
  * @argv: to
  * @b: from
  */
-void strtoking(char *argv[10], const char *b)
+void strtoking(char *argv[10], char *b)
 {
 	int i = 0;
 	char *token;

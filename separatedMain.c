@@ -84,7 +84,7 @@ int setupInput(char *argv[10], char **b)
 	return (characters);
 }
 
-void frees(char *_argv[10], char *b)
+void frees(char *_argv[10])
 {
 	int i = 0;
 	while(_argv[i] != NULL)

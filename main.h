@@ -11,11 +11,11 @@ extern char **environ;
 #define BUFSIZE 1024
 void _unsetenv(char *argv[10]);
 void _setenv(char *argv[10]);
-void strtoking(char *argv[10], const char *b);
+void strtoking(char *argv[10], char *b);
 void printenv(void);
 void changeDir(char *argv[10]);
 int checkFunctions(char *argv[10]);
 void formatString(int characters, char *argv[10], char *b);
 int setupInput(char *argv[10], char **b);
-void frees(char *argv[10], char *b);
+void frees(char *argv[10]);
 #endif

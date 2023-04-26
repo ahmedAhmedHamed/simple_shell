@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 		if (!processID)
 		{
 			et3amel(argv);
-			frees(_argv, b);
+			frees(_argv);
 			return (-1);
 		}
 	}
@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
 		characters = setupInput(_argv, &b);
 		if (feof(stdin)) /*checking for end of file*/
 		{
-			frees(_argv, b);
+			frees(_argv);
 			return (0);
 		}
 		formatString(characters, _argv, b);
@@ -61,24 +61,24 @@ int main(int argc, char *argv[])
 		{
 			if (_argv[1] != NULL)
 			{
-				frees(_argv, b);
+				frees(_argv);
 				return (atoi(_argv[1]));
 			}
 			else
 			{
-				frees(_argv, b);
+				frees(_argv);
 				return (0);
 			}
 		}
 		if (checkFunctions(_argv))
 		{
-			frees(_argv, b);
+			frees(_argv);
 			continue;
 		}
 		if (stat(_argv[0], &istat))/*checking if file exists*/
 		{/*error message likely needs to be changed*/
 			fprintf(stderr, "%s: No such file or directory\n", argv[0]);
-			frees(_argv, b);
+			frees(_argv);
 			continue;
 		}
 		processID = fork();
@@ -88,7 +88,7 @@ int main(int argc, char *argv[])
 			perror("execve");
 			return (0);
 		}
-		frees(_argv, b);
+		frees(_argv);
 		wait(&waitID);
 	}
 }
