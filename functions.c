@@ -28,8 +28,8 @@ int setupInput(char *_argv[10], char **b)
 
 	for (i = 0; i < 10; i++)
 		_argv[i] = NULL;
-
-	write(STDOUT_FILENO, "$ ", 2);
+	if (isatty(STDIN_FILENO))
+		write(STDOUT_FILENO, "$ ", 2);
 	characters = getline(b, &bufSize,  stdin);
 	return (characters);
 }
