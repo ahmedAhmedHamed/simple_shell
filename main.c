@@ -21,7 +21,7 @@ void SignalHandler(int sig)
 int et3amel(char *argv[], char *envp[])
 {
 	struct stat istat;
-	char *argv2[1] = {0};
+	char *argv2[10] = {0};
 
 	if (stat(argv[0], &istat))/*checking if file exists*/
 	{/*error message likely needs to be changed*/
