@@ -22,8 +22,6 @@ int et3amel(char *argv[], char *envp[])
 {
 	struct stat istat;
 	char *argv2[1] = {0};
-	int processID;
-	int waitID;
 
 	if (stat(argv[0], &istat))/*checking if file exists*/
 	{/*error message likely needs to be changed*/
@@ -48,12 +46,9 @@ int main(int argc, char *argv[], char *envp[])
 	char *b = NULL;/*necessary for usage with getline*/
 	size_t characters;
 	int processID;
-	int i = 0;
 	char *nextArgv[10];
 	(void) argc;
 	(void) argv;
-
-
 
 	while (true)
 	{
