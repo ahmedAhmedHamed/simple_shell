@@ -77,9 +77,6 @@ void strtoking(char *nextArgv[10], char *b)
 			l++;
 		}
 		nextArgv[k][l] = '\0';
-		printf("X%sX\n", nextArgv[k]);
-		dumpWhitespace((nextArgv[k]));
-		printf("X%sX\n", nextArgv[k]);
 		k++;
 		i++;
 		j = i;
