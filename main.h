@@ -17,4 +17,5 @@ extern char **environ;
 #include "casePipe.h"
 #include "systemCalls.h"
 #include "pathHandling.h"
+#include "myGetline.h"
 #endif
