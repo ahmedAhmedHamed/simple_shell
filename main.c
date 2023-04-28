@@ -34,7 +34,7 @@ void myStrCpy(char *from, char **to)
 /**
  *
  */
-void handlePipeInput(char *argv[], char *envp[])
+int handlePipeInput(char *argv[], char *envp[])
 {
 	int processID;
 	struct stat istat;
@@ -52,6 +52,7 @@ void handlePipeInput(char *argv[], char *envp[])
 		perror("execve");
 	}
 	wait(&processID);
+	return (processID);
 }
 
 /**
@@ -65,6 +66,7 @@ int pipedInputCase(char *envp[])
 	int waitID;
 	char *b = NULL;/*necessary for usage with getline*/
 	char *nextArgv[10];
+	int exit_status;
 
 	while (true)
 	{
@@ -91,6 +93,11 @@ int pipedInputCase(char *envp[])
 		{
 			frees(nextArgv);
 			free(b);
+			if ( WIFEXITED(waitID) )
+			{
+				exit_status = WEXITSTATUS(waitID);
+				exit(exit_status);
+			}
 			exit (0);
 		}
 
@@ -103,9 +110,8 @@ int pipedInputCase(char *envp[])
 			continue;
 		}
 
-		handlePipeInput(nextArgv, envp);
+		waitID = handlePipeInput(nextArgv, envp);
 
-		wait(&waitID);
 		frees(nextArgv);
 		free(b);
 		b = NULL;
@@ -143,7 +149,6 @@ int main(int argc, char *argv[], char *envp[])
 			free(b);
 			b = NULL;
 			continue;
-
 		}
 		if (isEqual(nextArgv[0], "exit"))
 		{
