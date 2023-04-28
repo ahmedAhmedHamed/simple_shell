@@ -82,6 +82,9 @@ int pipedInputCase(char *envp[])
 		if (isEqual(nextArgv[0], "env"))
 		{
 			printenv(envp);
+			frees(nextArgv);
+			free(b);
+			b = NULL;
 			continue;
 		}
 
@@ -111,7 +114,7 @@ int main(int argc, char *argv[], char *envp[])
 	(void) argc;
 	(void) argv;
 
-	if (!isatty(STDIN_FILENO))
+//	if (!isatty(STDIN_FILENO))
 		return (pipedInputCase(envp));/*might be wrong return value*/
 
 	while (true)
