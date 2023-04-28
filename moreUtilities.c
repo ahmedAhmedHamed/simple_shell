@@ -31,7 +31,6 @@ int fileExists(char *fileName)
 	{
 		write(STDERR_FILENO, fileName, _strlen(fileName));
 		write(STDERR_FILENO, ": No such file or directory\n", 28);
-		frees(fileName);
 		return (1);
 	}
 	return (0);
