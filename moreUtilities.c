@@ -23,15 +23,15 @@ void myStrCpy(char *from, char **to)
  * @nextArgv: ...
  * Return: ...
  */
-int fileExists(char *nextArgv[10])
+int fileExists(char *fileName)
 {
 	struct stat istat;
 
-	if (stat(nextArgv[0], &istat))/*checking if file exists*/
+	if (stat(fileName, &istat))/*checking if file exists*/
 	{
-		write(STDERR_FILENO, nextArgv[0], _strlen(nextArgv[0]));
+		write(STDERR_FILENO, fileName, _strlen(fileName));
 		write(STDERR_FILENO, ": No such file or directory\n", 28);
-		frees(nextArgv);
+		frees(fileName);
 		return (1);
 	}
 	return (0);
