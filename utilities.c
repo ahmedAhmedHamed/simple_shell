@@ -54,6 +54,7 @@ int _strlen(const char *s)
 
 /**
  * strtoking - separates b into nextArgv using a space as a delimiter
+ * i is where you stop, j is where you end, l is for the new string.
  * @nextArgv: ...
  * @b: ...
  */
@@ -67,8 +68,17 @@ void strtoking(char *nextArgv[10], char *b)
 	while (b[i] != '\0')
 	{
 		l = 0;
+		while (b[i] == ' ')
+		{
+			i++;
+			j++;
+		}
+		if (b[i] == '\0')
+			break;
+
 		while (b[i] != ' ' && b[i] != '\0')
 			i++;
+
 		nextArgv[k] = malloc(sizeof(char) * ((i - j) + 1));
 		while (i != j)
 		{
@@ -77,6 +87,7 @@ void strtoking(char *nextArgv[10], char *b)
 			l++;
 		}
 		nextArgv[k][l] = '\0';
+		dumpWhitespace(nextArgv[k]);
 		k++;
 		i++;
 		j = i;

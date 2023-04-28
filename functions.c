@@ -40,8 +40,22 @@ int setupInput(char *_argv[10], char **b)
  */
 int dumpWhitespace(char *toBeTrimmed)
 {
-	(void) toBeTrimmed;
-	return (0);
+	int  i,j;
+
+	for(i=0;toBeTrimmed[i]==' ';i++);
+
+	for(j=0;toBeTrimmed[i];i++)
+	{
+		toBeTrimmed[j++]=toBeTrimmed[i];
+	}
+	toBeTrimmed[j]='\0';
+	for(i=0;toBeTrimmed[i]!='\0';i++)
+	{
+		if(toBeTrimmed[i]!=' ')
+			j=i;
+	}
+	toBeTrimmed[j+1]='\0';
+	return (1);
 }
 
 /**
