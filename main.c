@@ -79,6 +79,13 @@ int pipedInputCase(char *envp[])
 		}
 		formatString(characters, nextArgv, b);
 
+		if (isEqual(nextArgv[0], "exit"))
+		{
+			frees(nextArgv);
+			free(b);
+			exit (0);
+		}
+
 		if (isEqual(nextArgv[0], "env"))
 		{
 			printenv(envp);
