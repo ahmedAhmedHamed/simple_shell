@@ -16,5 +16,5 @@ int setupInput(char *_argv[10], char **b);
 void printenv(char *envp[]);
 void formatString(int characters, char *argv[10], char *b);
 int fileExists(char *nextArgv[10]);
-int pipedInputCase(char *argv[], char *envp[]);
+int pipedInputCase(char *envp[]);
 #endif

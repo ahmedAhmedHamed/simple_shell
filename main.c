@@ -32,39 +32,56 @@ void myStrCpy(char *from, char **to)
 }
 
 /**
+ *
+ */
+void handlePipeInput(char *argv[], char *envp[])
+{
+	int processID;
+	struct stat istat;
+
+	processID = fork();
+	if (!processID)/*evaluates to true in fork's child*/
+	{
+		if (stat(argv[0], &istat))/*checking if file exists*/
+		{/*error message likely needs to be changed*/
+			write(1, argv[0], _strlen(argv[0]));
+			write(STDERR_FILENO, ": No such file or directory\n", 28);
+			return;
+		}
+		execve(argv[0], argv, envp);
+		perror("execve");
+	}
+	wait(&processID);
+}
+
+/**
  * argv - ...
  * @argv: ...
  * Return: ...
  */
-int pipedInputCase(char *argv[], char *envp[])
+int pipedInputCase(char *envp[])
 {
-	int processID;
-	struct stat istat;
-	char *pipedNextArgv[2] = {0 , 0};
-	int i = 0;
-	printf("%s ss\n", argv[1]);
-	while (argv[i] != NULL)
-	{
-		processID = fork();
-		if (!processID)/*evaluates to true in fork's child*/
-		{
-			if (stat(argv[i], &istat))/*checking if file exists*/
-			{/*error message likely needs to be changed*/
-				write(1, argv[i], _strlen(argv[i]));
-				write(STDERR_FILENO, ": No such file or directorya7a\n", 28);
-				continue;
-			}
-			myStrCpy(argv[i], &pipedNextArgv[0]);
-			printf("\n%s, %d\n", pipedNextArgv[0], i);
-			execve(argv[i], pipedNextArgv, envp);
-			perror("execve");
-		}
-		wait(&processID);
-		free(pipedNextArgv[0]);
-		pipedNextArgv[0] = NULL;
-		i++;
-	}
+	int characters;
+	int waitID;
+	int i = 4;
+	char *b = NULL;/*necessary for usage with getline*/
+	char *nextArgv[10];
 
+	while (i--)
+	{
+		signal(SIGINT, SignalHandler);
+		characters = setupInput(nextArgv, &b);
+		if (characters == -1)
+			return (0);
+		formatString(characters, nextArgv, b);
+		handlePipeInput(nextArgv, envp);
+
+		wait(&waitID);
+		frees(nextArgv);
+		free(b);
+		b = NULL;
+
+	}
 	return (0);
 }
 
@@ -84,14 +101,14 @@ int main(int argc, char *argv[], char *envp[])
 	(void) argc;
 	(void) argv;
 
-	myStrCpy(argv[0], &nextArgv[0]);
+	if (!isatty(STDIN_FILENO))
+		return (pipedInputCase(envp));/*might be wrong return value*/
 
 	while (true)
 	{
 		signal(SIGINT, SignalHandler);
 		characters = setupInput(nextArgv, &b);
 		formatString(characters, nextArgv, b);
-		return (pipedInputCase(nextArgv, envp));
 		if (isEqual(nextArgv[0], "exit"))
 		{
 			frees(nextArgv);
@@ -101,12 +118,8 @@ int main(int argc, char *argv[], char *envp[])
 		if (isEqual(nextArgv[0], "env"))
 		{
 			printenv(envp);
-			if (!isatty(STDIN_FILENO))
-				return (0);
 			continue;
 		}
-		if (!isatty(STDIN_FILENO))
-			return (pipedInputCase(nextArgv, envp));/*might be wrong return value*/
 
 		if (fileExists(nextArgv))
 			continue;
