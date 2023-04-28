@@ -135,7 +135,7 @@ int main(int argc, char *argv[], char *envp[])
 	(void) argc;
 	(void) argv;
 
-//	if (!isatty(STDIN_FILENO))
+	if (!isatty(STDIN_FILENO))
 	return (pipedInputCase(envp));/*might be wrong return value*/
 
 	while (true)
