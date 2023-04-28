@@ -64,11 +64,8 @@ int sysSetEnv(char *argv[10])
 {
 	int errorCatcher;
 
-	if (argv[1] == NULL || argv[2] == NULL)
-	{
-		write(STDERR_FILENO, "not enough arguments\n", 21);
+	if (argv[1] == NULL)
 		return (1);
-	}
 
 	errorCatcher = setenv(argv[1], argv[2], 1);
 
