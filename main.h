@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <signal.h>
+extern char **environ;
 
 #include "utilities.h"
 #include "inputHandling.h"
