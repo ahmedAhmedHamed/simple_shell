@@ -32,6 +32,27 @@ void myStrCpy(char *from, char **to)
 }
 
 /**
+ * ouratoi - string to integer
+ * @s: string to get int out of
+ * Return: the number on success, minus 7 on failure or if num has a char.
+ */
+int ouratoi(char *s)
+{
+	int number = 0;
+	int i;
+
+	if (s == NULL)
+		return (-7);
+	for (i = 0; i < _strlen(s); i++)
+	{
+		if (!(s[i] > 47 && s[i] < 58))
+			return (-7);
+		number = number * 10 + (s[i] - 48);
+	}
+	return (number);
+}
+
+/**
  *
  */
 int handlePipeInput(char *argv[], char *envp[])
@@ -39,7 +60,7 @@ int handlePipeInput(char *argv[], char *envp[])
 	int processID;
 	struct stat istat;
 
-	processID = fork();
+	processID = fork();/*fork must not be called if the command doesn’t exist*/
 	if (!processID)/*evaluates to true in fork's child*/
 	{
 		if (stat(argv[0], &istat))/*checking if file exists*/
@@ -56,11 +77,11 @@ int handlePipeInput(char *argv[], char *envp[])
 }
 
 /**
- * argv - ...
- * @argv: ...
- * Return: ...
+ * pipedInputCase - handles if pipe was input from console
+ * envp: the environment
+ * Return: exit code
  */
-int pipedInputCase(char *envp[])
+int pipedInputCase(char *progName, char *envp[])
 {
 	int characters;
 	int waitID = 0;
@@ -91,13 +112,28 @@ int pipedInputCase(char *envp[])
 
 		if (isEqual(nextArgv[0], "exit"))
 		{
-			frees(nextArgv);
 			free(b);
+			if (nextArgv[1] != NULL)
+			{
+				exit_status = ouratoi(nextArgv[1]);
+				if (exit_status != -7)
+				{
+					frees(nextArgv);
+					exit(exit_status);
+				}
+				write(STDERR_FILENO, progName, _strlen(progName));
+				write(STDERR_FILENO, ": 1: exit: Illegal number: ", 27);
+				write(STDERR_FILENO, nextArgv[1], _strlen(nextArgv[1]));
+				frees(nextArgv);
+				exit(2);
+			}
 			if ( WIFEXITED(waitID) )
 			{
+				frees(nextArgv);
 				exit_status = WEXITSTATUS(waitID);
 				exit(exit_status);
 			}
+			frees(nextArgv);
 			exit (0);
 		}
 
@@ -135,8 +171,8 @@ int main(int argc, char *argv[], char *envp[])
 	(void) argc;
 	(void) argv;
 
-	if (!isatty(STDIN_FILENO))
-	return (pipedInputCase(envp));/*might be wrong return value*/
+//	if (!isatty(STDIN_FILENO))/*evaluates to true if input is console piped*/
+		return (pipedInputCase(argv[0], envp));/*might be wrong return value*/
 
 	while (true)
 	{
