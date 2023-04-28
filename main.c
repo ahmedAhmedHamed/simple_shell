@@ -78,6 +78,13 @@ int pipedInputCase(char *envp[])
 			return (0);
 		}
 		formatString(characters, nextArgv, b);
+
+		if (isEqual(nextArgv[0], "env"))
+		{
+			printenv(envp);
+			continue;
+		}
+
 		handlePipeInput(nextArgv, envp);
 
 		wait(&waitID);
