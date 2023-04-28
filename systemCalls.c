@@ -39,8 +39,9 @@ int _unsetenv(char *argv[10])
 int changeDir(char *argv[10])
 {
 	int errorCatcher;
+	char *newCurrentDir;
 
-	if (argv[1] == NULL)/*could be wrong, if 1 is null should go home*/
+	if (argv[1] == NULL)/*TODO needs to be $home*/
 	{
 		chdir("/");
 		frees(argv);
@@ -50,6 +51,12 @@ int changeDir(char *argv[10])
 		argv[1][0] = '/';
 	errorCatcher = chdir(argv[1]);
 	frees(argv);
+	if (errorCatcher != -1)
+	{
+		getwd(newCurrentDir);
+		setenv("PWD", newCurrentDir, 1);
+		free(newCurrentDir);
+	}
 	if (errorCatcher == -1)
 		write(STDERR_FILENO, "Chdir failed\n", 14);
 	return (1);
