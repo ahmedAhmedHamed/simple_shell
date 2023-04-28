@@ -13,7 +13,7 @@ int hasSlash(char *target)
 		return (0);
 	while (target[i] != '\0')
 	{
-		if (target[i] == '\\')
+		if (target[i] == '/')
 			return (1);
 		i++;
 	}
@@ -33,7 +33,7 @@ int handlePipeInput(char *argv[], char *envp[])
 	struct stat istat;
 	char *location = NULL;
 
-	if (!hasSlash(argv[0]))
+	if (!(hasSlash(argv[0])))
 	{
 		location = get_location(argv[0]);
 		if (location == NULL)
