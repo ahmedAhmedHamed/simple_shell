@@ -63,7 +63,7 @@ int handlePipeInput(char *argv[], char *envp[])
 int pipedInputCase(char *envp[])
 {
 	int characters;
-	int waitID;
+	int waitID = 0;
 	char *b = NULL;/*necessary for usage with getline*/
 	char *nextArgv[10];
 	int exit_status;
@@ -135,8 +135,8 @@ int main(int argc, char *argv[], char *envp[])
 	(void) argc;
 	(void) argv;
 
-	if (!isatty(STDIN_FILENO))
-		return (pipedInputCase(envp));/*might be wrong return value*/
+//	if (!isatty(STDIN_FILENO))
+	return (pipedInputCase(envp));/*might be wrong return value*/
 
 	while (true)
 	{
