@@ -38,14 +38,24 @@ void SignalHandler(int sig)
  */
 int systemCallWrapper(char *nextArgv[], char *b, char *envp[])
 {
+	int returnCode;
+
 	if (isEqual(nextArgv[0], "env"))
 		return (sysPrintEnv(nextArgv, b, envp));
 
 	if (isEqual(nextArgv[0], "setenv"))
-		return(sysSetEnv(nextArgv));
+	{
+		returnCode = (sysSetEnv(nextArgv));
+		freeAll(b, nextArgv);
+		return (returnCode);
+	}
 
 	if (isEqual(nextArgv[0], "unsetenv"))
-		return(_unsetenv(nextArgv));
+	{
+		returnCode = (_unsetenv(nextArgv);
+		freeAll(b, nextArgv);
+		return (returnCode);
+	}
 
 	if (isEqual(nextArgv[0], "cd"))/*likely need to handle $VARIABLE*/
 	{
