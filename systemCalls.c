@@ -43,11 +43,13 @@ int changeDir(char *argv[10])
 	if (argv[1] == NULL)/*could be wrong, if 1 is null should go home*/
 	{
 		chdir("/");
+		frees(argv);
 		return (1);
 	}
 	if (argv[1][0] == '-' || argv[1][0] == '~')
 		argv[1][0] = '/';
 	errorCatcher = chdir(argv[1]);
+	frees(argv);
 	if (errorCatcher == -1)
 		write(STDERR_FILENO, "Chdir failed\n", 14);
 	return (1);

@@ -48,7 +48,10 @@ int systemCallWrapper(char *nextArgv[], char *b, char *envp[])
 		return(_unsetenv(nextArgv));
 
 	if (isEqual(nextArgv[0], "cd"))/*likely need to handle $VARIABLE*/
+	{
+		free(b);
 		return(changeDir(nextArgv));
+	}
 
 	return (0);
 }
