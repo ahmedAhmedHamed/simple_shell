@@ -1,5 +1,21 @@
 #include "main.h"
 
+int hasSlash(char *target)
+{
+	int i = 0;
+
+	if (target == 0)
+		return (0);
+	while (target[i] != '\0')
+	{
+		if (target[i] == '\\')
+			return (1);
+		i++;
+	}
+
+	return (0);
+}
+
 /**
  * handlePipeInput - handles input from pipe
  * @argv: ...
@@ -8,8 +24,18 @@
  */
 int handlePipeInput(char *argv[], char *envp[])
 {
-	int processID;
+	int processID = 0;
 	struct stat istat;
+	char *location = NULL;
+
+	if (!hasSlash(argv[0]))
+	{
+		location = get_location(argv[0]);
+		if (location == NULL)
+			return (0);
+		free(argv[0]);
+		argv[0] = location;
+	}
 
 	processID = fork();/*fork must not be called if the command doesn’t exist*/
 	if (!processID)/*evaluates to true in fork's child*/
