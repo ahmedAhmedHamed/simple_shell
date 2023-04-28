@@ -2,6 +2,7 @@
 
 /**
  * printenv - prints everything that's inside the environ variable
+ * @envp: ...
  */
 void printenv(char *envp[])
 {
@@ -15,64 +16,71 @@ void printenv(char *envp[])
 }
 
 /**
- * setupInput - prints the "$ ", clears argv and takes input into b
- * @_argv: argv
- * @b: other string
- * Return: number of characters read from input
+ * SignalHandler - handles the signal
+ * @sig: s
  */
-int setupInput(char *_argv[10], char **b)
+void SignalHandler(int sig)
 {
-	int characters;
-	int i;
-	size_t bufSize = 0;
+	char *prompt = "\n$ ";
 
-	for (i = 0; i < 10; i++)
-		_argv[i] = NULL;
-	if (isatty(STDIN_FILENO))
-		write(STDOUT_FILENO, "$ ", 2);
-	characters = getline(b, &bufSize,  stdin);
-	return (characters);
+	(void)sig;
+	signal(SIGINT, SignalHandler);
+	write(STDIN_FILENO, prompt, 3);
 }
 
 /**
- * dumpWhitespace - removes the whitespace from a string
- * @toBeTrimmed: ...
- */
-int dumpWhitespace(char *toBeTrimmed)
-{
-	int  i,j;
-
-	for(i=0;toBeTrimmed[i]==' ';i++);
-
-	for(j=0;toBeTrimmed[i];i++)
-	{
-		toBeTrimmed[j++]=toBeTrimmed[i];
-	}
-	toBeTrimmed[j]='\0';
-	for(i=0;toBeTrimmed[i]!='\0';i++)
-	{
-		if(toBeTrimmed[i]!=' ')
-			j=i;
-	}
-	toBeTrimmed[j+1]='\0';
-	return (1);
-}
-
-/**
- * fileExists - returns 0 if file exists
+ * systemCallWrapper - chooses which system call to call, if any
  * @nextArgv: ...
- * Return: ...
+ * @b: ...
+ * @envp: ...
+ * Return: 1 if it calls something 0 if it doesn't
  */
-int fileExists(char *nextArgv[10])
+int systemCallWrapper(char *nextArgv[], char *b, char *envp[])
 {
-	struct stat istat;
-
-	if (stat(nextArgv[0], &istat))/*checking if file exists*/
+	if (isEqual(nextArgv[0], "env"))
 	{
-		write(STDERR_FILENO, nextArgv[0], _strlen(nextArgv[0]));
-		write(STDERR_FILENO, ": No such file or directory\n", 28);
+		printenv(envp);
 		frees(nextArgv);
+		free(b);
+		b = NULL;
 		return (1);
 	}
 	return (0);
+}
+
+/**
+ * EXIT - handles the exit call
+ * @nextArgv: ...
+ * @b: ...
+ * @progName: ...
+ * @waitID: ...
+ */
+void EXIT(char *nextArgv[], char *b, char *progName, int waitID)
+{
+	int exit_status;
+
+	free(b);
+	if (nextArgv[1] != NULL)
+	{
+		exit_status = ouratoi(nextArgv[1]);
+		if (exit_status != -7)
+		{
+			frees(nextArgv);
+			exit(exit_status);
+		}
+		write(STDERR_FILENO, progName, _strlen(progName));
+		write(STDERR_FILENO, ": 1: exit: Illegal number: ", 27);
+		write(STDERR_FILENO, nextArgv[1], _strlen(nextArgv[1]));
+		write(STDERR_FILENO, "\n", 1);
+		frees(nextArgv);
+		exit(2);
+	}
+	if (WIFEXITED(waitID))
+	{
+		frees(nextArgv);
+		exit_status = WEXITSTATUS(waitID);
+		exit(exit_status);
+	}
+	frees(nextArgv);
+	exit(0);
 }

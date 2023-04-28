@@ -9,7 +9,7 @@
 int isEqual(char *one, char *two)
 {
 	if (one == NULL || two == NULL)
-		return 0;
+		return (0);
 	while (*one)
 	{
 		if (*one != *two)
@@ -55,55 +55,45 @@ int _strlen(const char *s)
 }
 
 /**
- * strtoking - separates b into nextArgv using a space as a delimiter
- * i is where you stop, j is where you end, l is for the new string.
- * @nextArgv: ...
- * @b: ...
+ * dumpWhitespace - removes the whitespace from a string
+ * @toBeTrimmed: ...
+ * Return: 1 always
  */
-void strtoking(char *nextArgv[10], char *b)
+int dumpWhitespace(char *toBeTrimmed)
 {
-	int i = 0;
-	int j = 0;
-	int k = 0;
-	int l;
+	int  i;
+	int j;
 
-	while (b[i] != '\0')
-	{
-		l = 0;
-		while (b[i] == ' ')
-		{
-			i++;
-			j++;
-		}
-		if (b[i] == '\0')
-			break;
+	for (i = 0; toBeTrimmed[i] == ' '; i++)
+		;
 
-		while (b[i] != ' ' && b[i] != '\0')
-			i++;
-
-		nextArgv[k] = malloc(sizeof(char) * ((i - j) + 1));
-		while (i != j)
-		{
-			nextArgv[k][l] = b[j];
-			j++;
-			l++;
-		}
-		nextArgv[k][l] = '\0';
-		dumpWhitespace(nextArgv[k]);
-		k++;
-		i++;
-		j = i;
-	}
+	for (j = 0; toBeTrimmed[i]; i++)
+		toBeTrimmed[j++] = toBeTrimmed[i];
+	toBeTrimmed[j] = '\0';
+	for (i = 0; toBeTrimmed[i] != '\0'; i++)
+		if (toBeTrimmed[i] != ' ')
+			j = i;
+	toBeTrimmed[j + 1] = '\0';
+	return (1);
 }
 
 /**
- * formatString - reformats the string "b" then puts it in argv
- * @argv: argv
- * @b: string to be formatted
- * @characters: number of characters read before
+ * ouratoi - string to integer
+ * @s: string to get int out of
+ * Return: the number on success, minus 7 on failure or if num has a char.
  */
-void formatString(int characters, char *argv[10], char *b)
+int ouratoi(char *s)
 {
-	b[characters - 1] = '\0';
-	strtoking(argv, b);/*separating string into tokens into argv*/
+	int number = 0;
+	int i;
+
+	if (s == NULL)
+		return (-7);
+	for (i = 0; i < _strlen(s); i++)
+	{
+		if (!(s[i] > 47 && s[i] < 58))
+			return (-7);
+		number = number * 10 + (s[i] - 48);
+	}
+	return (number);
 }

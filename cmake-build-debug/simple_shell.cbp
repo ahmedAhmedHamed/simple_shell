@@ -78,7 +78,22 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/vboxuser/simple_shell/casePipe.c">
+			<Option target="simple_shell"/>
+		</Unit>
+		<Unit filename="/home/vboxuser/simple_shell/casePipe.h">
+			<Option target="simple_shell"/>
+		</Unit>
 		<Unit filename="/home/vboxuser/simple_shell/functions.c">
+			<Option target="simple_shell"/>
+		</Unit>
+		<Unit filename="/home/vboxuser/simple_shell/functions.h">
+			<Option target="simple_shell"/>
+		</Unit>
+		<Unit filename="/home/vboxuser/simple_shell/inputHandling.c">
+			<Option target="simple_shell"/>
+		</Unit>
+		<Unit filename="/home/vboxuser/simple_shell/inputHandling.h">
 			<Option target="simple_shell"/>
 		</Unit>
 		<Unit filename="/home/vboxuser/simple_shell/main.c">
@@ -87,7 +102,16 @@
 		<Unit filename="/home/vboxuser/simple_shell/main.h">
 			<Option target="simple_shell"/>
 		</Unit>
+		<Unit filename="/home/vboxuser/simple_shell/moreUtilities.c">
+			<Option target="simple_shell"/>
+		</Unit>
+		<Unit filename="/home/vboxuser/simple_shell/moreUtilities.h">
+			<Option target="simple_shell"/>
+		</Unit>
 		<Unit filename="/home/vboxuser/simple_shell/utilities.c">
+			<Option target="simple_shell"/>
+		</Unit>
+		<Unit filename="/home/vboxuser/simple_shell/utilities.h">
 			<Option target="simple_shell"/>
 		</Unit>
 		<Unit filename="/home/vboxuser/simple_shell/CMakeLists.txt">
