@@ -35,6 +35,15 @@ int setupInput(char *_argv[10], char **b)
 }
 
 /**
+ * dumpWhitespace - removes the whitespace from a string
+ * @toBeTrimmed: ...
+ */
+int dumpWhitespace(char *toBeTrimmed)
+{
+
+}
+
+/**
  * fileExists - returns 0 if file exists
  * @nextArgv: ...
  * Return: ...
