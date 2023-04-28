@@ -46,7 +46,7 @@ void handlePipeInput(char *argv[], char *envp[])
 		{/*error message likely needs to be changed*/
 			write(1, argv[0], _strlen(argv[0]));
 			write(STDERR_FILENO, ": No such file or directory\n", 28);
-			return;
+			exit (0);
 		}
 		execve(argv[0], argv, envp);
 		perror("execve");
