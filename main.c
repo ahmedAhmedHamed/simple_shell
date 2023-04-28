@@ -124,6 +124,7 @@ int pipedInputCase(char *progName, char *envp[])
 				write(STDERR_FILENO, progName, _strlen(progName));
 				write(STDERR_FILENO, ": 1: exit: Illegal number: ", 27);
 				write(STDERR_FILENO, nextArgv[1], _strlen(nextArgv[1]));
+				write(STDERR_FILENO, "\n", 1);
 				frees(nextArgv);
 				exit(2);
 			}
