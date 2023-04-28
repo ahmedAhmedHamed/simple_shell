@@ -31,8 +31,7 @@ void frees(char *_argv[10])
 
 	while (_argv != NULL && _argv[i] != NULL)
 	{
-		free(_argv[i]);
-		_argv[i] = NULL;
+		freeChpointer(&_argv[i]);
 		i++;
 	}
 }

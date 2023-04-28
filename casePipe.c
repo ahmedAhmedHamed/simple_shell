@@ -1,6 +1,17 @@
 #include "main.h"
 
 /**
+ * freeChpointer - frees a char pointer
+ * @freedom: ...
+ */
+void freeChpointer(char **freedom)
+{
+	if (*freedom != NULL)
+		free(*freedom);
+	*freedom = NULL;
+}
+
+/**
  * hasSlash - checks if a string has a slash in it
  * @target: string to be checked
  * Return: 1 if it has a slash, 0 otherwise
@@ -45,7 +56,7 @@ int handlePipeInput(char *argv[], char *envp[], char *progName)
 			write(STDERR_FILENO, ": not found\n", 12);
 			return (0);
 		}
-		free(argv[0]);
+		freeChpointer(&argv[0]);
 		argv[0] = location;
 		location = NULL;
 	}
@@ -101,8 +112,7 @@ int pipedInputCase(char *progName, char *envp[])
 
 		waitID = handlePipeInput(nextArgv, envp, progName);
 		frees(nextArgv);
-		free(b);
-		b = NULL;
+		freeChpointer(&b);
 	}
 	return (0);
 }

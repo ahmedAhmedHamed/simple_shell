@@ -86,16 +86,16 @@ char *get_location(char *command)
 			my_strcat(filePath, "\0");
 			if (stat(filePath, &buffer) == 0)
 			{
-				free(pathCopy);
+				freeChpointer(&pathCopy);
 				return (filePath);
 			}
 			else
 			{
-				free(filePath);
+					freeChpointer(&filePath);
 				pathToken = strtok(NULL, ":");
 			}
 		}
-		free(pathCopy);
+			freeChpointer(&pathCopy);
 		if (stat(command, &buffer) == 0)
 		{
 			return (command);

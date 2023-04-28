@@ -47,8 +47,8 @@ void freeAll(char *b, char *nextArgv[])
 {
 	if (nextArgv != NULL)
 		frees(nextArgv);
-	if (b != NULL)
-		free(b);
+	freeChpointer(&b);
+
 }
 /**
  * freeExit - frees both parameters then exits the program

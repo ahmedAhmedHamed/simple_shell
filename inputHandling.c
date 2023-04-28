@@ -16,7 +16,7 @@ int setupInput(char *_argv[10], char **b)
 		_argv[i] = NULL;
 	if (isatty(STDIN_FILENO))
 		write(STDOUT_FILENO, "$ ", 2);
-	characters = myGetline(b, &bufSize,  stdin);
+	characters = getline(b, &bufSize,  stdin);
 	return (characters);
 }
 

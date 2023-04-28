@@ -11,8 +11,7 @@ int sysPrintEnv(char *nextArgv[], char *b, char *envp[])
 {
 	printenv(envp);
 	frees(nextArgv);
-	free(b);
-	b = NULL;
+	freeChpointer(&b);
 	return (1);
 }
 
@@ -55,7 +54,7 @@ int changeDir(char *argv[10])
 	{
 		getcwd(newCurrentDir, 100);
 		setenv("PWD", newCurrentDir, 1);
-		free(newCurrentDir);
+		freeChpointer(&newCurrentDir);
 	}
 	if (errorCatcher == -1)
 		write(STDERR_FILENO, "Chdir failed\n", 14);
@@ -92,7 +91,7 @@ void EXIT(char *nextArgv[], char *b, char *progName, int waitID)
 {
 	int exit_status;
 
-	free(b);
+	freeChpointer(&b);
 	if (nextArgv[1] != NULL)
 	{
 		exit_status = ouratoi(nextArgv[1]);

@@ -28,7 +28,8 @@ void *myRealloc(void *ptr, unsigned int old_size, unsigned int new_size)
 
 	if (new_size == 0 && ptr != NULL)
 	{
-		free(ptr);
+		free (ptr);
+		ptr = NULL;
 		return (NULL);
 	}
 
@@ -37,6 +38,7 @@ void *myRealloc(void *ptr, unsigned int old_size, unsigned int new_size)
 	if (mem == NULL)
 	{
 		free(ptr);
+		ptr = NULL;
 		return (NULL);
 	}
 
@@ -44,8 +46,8 @@ void *myRealloc(void *ptr, unsigned int old_size, unsigned int new_size)
 
 	for (index = 0; index < old_size && index < new_size; index++)
 		filler[index] = *ptr_copy++;
-
-	free(ptr);
+		free(ptr);
+		ptr = NULL;
 	return (mem);
 }
 
@@ -77,9 +79,10 @@ void assignLineptr(char **lineptr, size_t *n, char *buffer, size_t b)
 	else
 	{
 		myStrCpy(*lineptr, &buffer);
-		free(buffer);
+		freeChpointer(&buffer);
 	}
 }
+
 
 /**
  * myGetline - Reads input from a stream.
@@ -109,7 +112,7 @@ ssize_t myGetline(char **lineptr, size_t *n, FILE *stream)
 		r = read(STDIN_FILENO, &c, 1);
 		if (r == -1 || (r == 0 && input == 0))
 		{
-			free(buffer);
+			freeChpointer(&buffer);
 			return (-1);
 		}
 		if (r == 0 && input != 0)
