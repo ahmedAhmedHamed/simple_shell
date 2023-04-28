@@ -16,4 +16,5 @@ extern char **environ;
 #include "functions.h"
 #include "casePipe.h"
 #include "systemCalls.h"
+#include "pathHandling.h"
 #endif

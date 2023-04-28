@@ -108,6 +108,12 @@
 		<Unit filename="/home/vboxuser/simple_shell/moreUtilities.h">
 			<Option target="simple_shell"/>
 		</Unit>
+		<Unit filename="/home/vboxuser/simple_shell/pathHandling.c">
+			<Option target="simple_shell"/>
+		</Unit>
+		<Unit filename="/home/vboxuser/simple_shell/pathHandling.h">
+			<Option target="simple_shell"/>
+		</Unit>
 		<Unit filename="/home/vboxuser/simple_shell/systemCalls.c">
 			<Option target="simple_shell"/>
 		</Unit>

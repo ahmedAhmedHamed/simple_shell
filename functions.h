@@ -3,4 +3,5 @@
 void printenv(char *envp[]);
 void SignalHandler(int sig);
 int systemCallWrapper(char *nextArgv[], char *b, char *envp[]);
+char *get_location(char *command);
 #endif
