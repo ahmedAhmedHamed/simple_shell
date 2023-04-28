@@ -7,4 +7,4 @@ include_directories(.)
 
 add_executable(simple_shell
         main.c
-        main.h utilities.c functions.c inputHandling.c moreUtilities.c casePipe.c utilities.h inputHandling.h moreUtilities.h functions.h casePipe.h)
+        main.h utilities.c functions.c inputHandling.c moreUtilities.c casePipe.c utilities.h inputHandling.h moreUtilities.h functions.h casePipe.h systemCalls.c systemCalls.h)
