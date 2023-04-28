@@ -42,7 +42,7 @@ int changeDir(char *argv[10])
 
 	if (argv[1] == NULL)/*could be wrong, if 1 is null should go home*/
 	{
-		write(STDERR_FILENO, "Not enough arguments\n", 22);
+		chdir("/");
 		return (1);
 	}
 	if (argv[1][0] == '-' || argv[1][0] == '~')
