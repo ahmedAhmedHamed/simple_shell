@@ -52,7 +52,7 @@ int systemCallWrapper(char *nextArgv[], char *b, char *envp[])
 
 	if (isEqual(nextArgv[0], "unsetenv"))
 	{
-		returnCode = (_unsetenv(nextArgv);
+		returnCode = (_unsetenv(nextArgv));
 		freeAll(b, nextArgv);
 		return (returnCode);
 	}
