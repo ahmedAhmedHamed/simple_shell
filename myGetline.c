@@ -1,16 +1,14 @@
 #include "main.h"
 
 /**
- * _realloc - Reallocates a memory block using malloc and free.
+ * myRealloc - Reallocates a memory block using malloc and free.
  * @ptr: A pointer to the memory previously allocated.
  * @old_size: The size in bytes of the allocated space for ptr.
  * @new_size: The size in bytes for the new memory block.
  *
- * Return: If new_size == old_size - ptr.
- *         If new_size == 0 and ptr is not NULL - NULL.
- *         Otherwise - a pointer to the reallocated memory block.
+ * Return: same as std realloc
  */
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
+void *myRealloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
 	void *mem;
 	char *ptr_copy, *filler;
@@ -52,13 +50,13 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 }
 
 /**
- * assign_lineptr - Reassigns the lineptr variable for _getline.
+ * assignLineptr - Reassigns the lineptr variable for _getline.
  * @lineptr: The linept
  * @n: The size of the linept
  * @buffer: The string to be put in the lineptr
  * @b: The size of buffer.
  */
-void assign_lineptr(char **lineptr, size_t *n, char *buffer, size_t b)
+void assignLineptr(char **lineptr, size_t *n, char *buffer, size_t b)
 {
 	if (*lineptr == NULL)
 	{
@@ -78,7 +76,7 @@ void assign_lineptr(char **lineptr, size_t *n, char *buffer, size_t b)
 	}
 	else
 	{
-		myStrCpy(*lineptr, buffer);
+		myStrCpy(*lineptr, &buffer);
 		free(buffer);
 	}
 }
@@ -123,14 +121,14 @@ ssize_t myGetline(char **lineptr, size_t *n, FILE *stream)
 		}
 
 		if (input >= 120)
-			buffer = _realloc(buffer, input, input + 1);
+			buffer = myRealloc(buffer, input, input + 1);
 
 		buffer[input] = c;
 		input++;
 	}
 	buffer[input] = '\0';
 
-	assign_lineptr(lineptr, n, buffer, input);
+	assignLineptr(lineptr, n, buffer, input);
 
 	ret = input;
 	if (r != 0)
