@@ -30,7 +30,7 @@ char *findEnv(char *search)
  */
 char *myStrDup(char *toDupe)
 {
-	char *duplicated = malloc(_strlen(toDupe) * sizeof(char));
+	char *duplicated = malloc(_strlen(toDupe) * sizeof(char) + 1);
 	int i = 0;
 
 	while (toDupe[i] != '\0')
@@ -38,29 +38,24 @@ char *myStrDup(char *toDupe)
 		duplicated[i] = toDupe[i];
 		i++;
 	}
-	duplicated[i] = toDupe[i];
+	duplicated[i] = '\0';
 	return (duplicated);
 }
 
 /**
- * myStrCat - concatenates two strings
- * @dest: destination string
- * @src: source string
+ * my_strcat - concatenates strings
+ * @destination: ...
+ * @source: ...
+ * Return: new string
  */
-void myStrCat(char *dest, char *src)
-{
-	int i = 0;
-	int j = 0;
+char* my_strcat(char* destination, const char* source) {
+	char *ptr = destination + strlen(destination);
 
-	while (dest[i] != '\0')
-		i++;
-	while (src[j] != '\0')
-	{
-		dest[i] = src[j];
-		i++;
-		j++;
-	}
-	dest[i] = '\0';
+	while (*source != '\0')
+		*ptr++ = *source++;
+
+	*ptr = '\0';
+	return destination;
 }
 
 /**
@@ -90,9 +85,9 @@ char *get_location(char *command)
 			filePath = malloc(commandLength + directory_length + 2); /* NB: we added 2 for the slash and null character we will introduce in the full command */
 			/* to build the path for the command, let's copy the directory path and concatenate the command to it */
 			myStrCpy(pathToken, &filePath);
-			strcat(filePath, "/");
-			strcat(filePath, command);
-			strcat(filePath, "\0");
+			my_strcat(filePath, "/");
+			my_strcat(filePath, command);
+			my_strcat(filePath, "\0");
 			if (stat(filePath, &buffer) == 0)
 			{
 				free(pathCopy);

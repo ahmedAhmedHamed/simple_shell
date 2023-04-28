@@ -40,6 +40,7 @@ int handlePipeInput(char *argv[], char *envp[])
 			return (0);
 		free(argv[0]);
 		argv[0] = location;
+		location = NULL;
 	}
 
 	processID = fork();/*fork must not be called if the command doesn’t exist*/
@@ -92,7 +93,6 @@ int pipedInputCase(char *progName, char *envp[])
 			continue;
 
 		waitID = handlePipeInput(nextArgv, envp);
-
 		frees(nextArgv);
 		free(b);
 		b = NULL;

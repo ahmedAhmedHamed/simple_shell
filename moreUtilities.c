@@ -9,13 +9,15 @@ void myStrCpy(char *from, char **to)
 {
 	int i = 0;
 	int stop = _strlen(from);
-	(*to) = malloc(_strlen(from) * sizeof(char));
+
+	/*(*to) = malloc(_strlen(from) * sizeof(char) + 1);*/
 
 	while (i <= stop)
 	{
 		(*to)[i] = from[i];
 		i++;
 	}
+
 }
 
 /**
