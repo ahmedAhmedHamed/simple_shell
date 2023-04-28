@@ -39,9 +39,6 @@ void SignalHandler(int sig)
 int systemCallWrapper(char *nextArgv[], char *b, char *envp[])
 {
 	if (isEqual(nextArgv[0], "env"))
-		return (systemCallWrapper(nextArgv, b, envp));
-
-	if (isEqual(nextArgv[0], "env"))
 		return (sysPrintEnv(nextArgv, b, envp));
 
 	if (isEqual(nextArgv[0], "setenv"))
