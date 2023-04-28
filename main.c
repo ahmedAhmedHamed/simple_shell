@@ -21,7 +21,6 @@ void SignalHandler(int sig)
 int et3amel(char *argv[], char *envp[])
 {
 	struct stat istat;
-	char *argv2[10] = {0};
 
 	if (stat(argv[0], &istat))/*checking if file exists*/
 	{/*error message likely needs to be changed*/
@@ -29,7 +28,7 @@ int et3amel(char *argv[], char *envp[])
 		write(STDERR_FILENO, ": No such file or directorya7a\n", 28);
 		return (0);
 	}
-	execve(argv[0], argv2, envp);
+	execve(argv[0], argv, envp);
 	perror("execve");
 	return (1);
 }
