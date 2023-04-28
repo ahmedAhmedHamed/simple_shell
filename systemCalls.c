@@ -64,7 +64,7 @@ int sysSetEnv(char *argv[10])
 {
 	int errorCatcher;
 
-	if (argv[1] == NULL)
+	if (argv[1] == NULL || argv[2] == NULL)
 		return (1);
 
 	errorCatcher = setenv(argv[1], argv[2], 1);
