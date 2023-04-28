@@ -63,7 +63,7 @@ int changeDir(char *argv[10])
 }
 
 /**
- * _setenv - setenv
+ * sysSetEnv - setenv
  * @argv: hello
  * Return: 1 always
  */
