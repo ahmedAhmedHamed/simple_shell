@@ -79,6 +79,9 @@ int pipedInputCase(char *envp[])
 		}
 		formatString(characters, nextArgv, b);
 
+		if (_strlen(nextArgv[0]) == -1)
+			continue;
+
 		if (isEqual(nextArgv[0], "exit"))
 		{
 			frees(nextArgv);
@@ -129,6 +132,8 @@ int main(int argc, char *argv[], char *envp[])
 		signal(SIGINT, SignalHandler);
 		characters = setupInput(nextArgv, &b);
 		formatString(characters, nextArgv, b);
+		if (_strlen(nextArgv[0]) == -1)
+			continue;
 		if (isEqual(nextArgv[0], "exit"))
 		{
 			frees(nextArgv);

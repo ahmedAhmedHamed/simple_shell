@@ -8,6 +8,8 @@
  */
 int isEqual(char *one, char *two)
 {
+	if (one == NULL || two == NULL)
+		return 0;
 	while (*one)
 	{
 		if (*one != *two)
