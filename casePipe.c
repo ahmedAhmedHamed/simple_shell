@@ -27,7 +27,7 @@ int hasSlash(char *target)
  * @envp: ...
  * Return: the process ID of the previous process
  */
-int handlePipeInput(char *argv[], char *envp[])
+int handlePipeInput(char *argv[], char *envp[], char *progName)
 {
 	int processID = 0;
 	struct stat istat;
@@ -37,7 +37,13 @@ int handlePipeInput(char *argv[], char *envp[])
 	{
 		location = get_location(argv[0]);
 		if (location == NULL)
+		{
+			write(STDERR_FILENO, progName, _strlen(progName));
+			write(STDERR_FILENO, ": 1:", 4);
+			write (STDERR_FILENO, argv[0], _strlen(argv[0]));
+			write(STDERR_FILENO, ": not found\n", 12);
 			return (0);
+		}
 		free(argv[0]);
 		argv[0] = location;
 		location = NULL;
@@ -92,7 +98,7 @@ int pipedInputCase(char *progName, char *envp[])
 		if (systemCallWrapper(nextArgv, b, envp))
 			continue;
 
-		waitID = handlePipeInput(nextArgv, envp);
+		waitID = handlePipeInput(nextArgv, envp, progName);
 		frees(nextArgv);
 		free(b);
 		b = NULL;
