@@ -39,7 +39,7 @@ int _unsetenv(char *argv[10])
 int changeDir(char *argv[10])
 {
 	int errorCatcher;
-	char *newCurrentDir;
+	char *newCurrentDir = malloc(100 * sizeof(char));
 
 	if (argv[1] == NULL)/*TODO needs to be $home*/
 	{
@@ -53,7 +53,7 @@ int changeDir(char *argv[10])
 	frees(argv);
 	if (errorCatcher != -1)
 	{
-		getwd(newCurrentDir);
+		getcwd(newCurrentDir, 100);
 		setenv("PWD", newCurrentDir, 1);
 		free(newCurrentDir);
 	}
