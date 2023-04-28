@@ -40,7 +40,8 @@ int setupInput(char *_argv[10], char **b)
  */
 int dumpWhitespace(char *toBeTrimmed)
 {
-
+	(void) toBeTrimmed;
+	return (0);
 }
 
 /**
