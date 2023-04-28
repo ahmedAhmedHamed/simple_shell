@@ -44,7 +44,7 @@ void handlePipeInput(char *argv[], char *envp[])
 	{
 		if (stat(argv[0], &istat))/*checking if file exists*/
 		{/*error message likely needs to be changed*/
-			write(1, argv[0], _strlen(argv[0]));
+			write(STDERR_FILENO, argv[0], _strlen(argv[0]));
 			write(STDERR_FILENO, ": No such file or directory\n", 28);
 			exit (0);
 		}
@@ -71,7 +71,12 @@ int pipedInputCase(char *envp[])
 		signal(SIGINT, SignalHandler);
 		characters = setupInput(nextArgv, &b);
 		if (characters == -1)
+		{
+			frees(nextArgv);
+			free(b);
+			b = NULL;
 			return (0);
+		}
 		formatString(characters, nextArgv, b);
 		handlePipeInput(nextArgv, envp);
 

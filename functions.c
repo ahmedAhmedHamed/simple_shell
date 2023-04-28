@@ -45,7 +45,7 @@ int fileExists(char *nextArgv[10])
 
 	if (stat(nextArgv[0], &istat))/*checking if file exists*/
 	{
-		write(1, nextArgv[0], _strlen(nextArgv[0]));
+		write(STDERR_FILENO, nextArgv[0], _strlen(nextArgv[0]));
 		write(STDERR_FILENO, ": No such file or directory\n", 28);
 		frees(nextArgv);
 		return (1);
