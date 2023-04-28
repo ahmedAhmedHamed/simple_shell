@@ -1,5 +1,10 @@
 #include "main.h"
 
+/**
+ * hasSlash - checks if a string has a slash in it
+ * @target: string to be checked
+ * Return: 1 if it has a slash, 0 otherwise
+ */
 int hasSlash(char *target)
 {
 	int i = 0;

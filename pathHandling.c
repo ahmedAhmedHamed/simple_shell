@@ -1,5 +1,10 @@
 #include "main.h"
 
+/**
+ * findEnv - checks for the path environment
+ * @search: unused currently
+ * Return: the pointer to the entry of the path environment, or null
+ */
 char *findEnv(char *search)
 {
 	int i;
@@ -18,6 +23,11 @@ char *findEnv(char *search)
 	return (NULL);
 }
 
+/**
+ * myStrDup - allocates dynamic memory and copies the strings
+ * @toDupe: string to be duplicated
+ * Return: dynamically allocated string
+ */
 char *myStrDup(char *toDupe)
 {
 	char *duplicated = malloc(_strlen(toDupe) * sizeof(char));
@@ -32,6 +42,11 @@ char *myStrDup(char *toDupe)
 	return (duplicated);
 }
 
+/**
+ * myStrCat - concatenates two strings
+ * @dest: destination string
+ * @src: source string
+ */
 void myStrCat(char *dest, char *src)
 {
 	int i = 0;
@@ -48,6 +63,11 @@ void myStrCat(char *dest, char *src)
 	dest[i] = '\0';
 }
 
+/**
+ * get_location - gets the location of the command in the path environment var
+ * @command: command to be found
+ * Return: null if the command doesn't exist, the path to the command otherwise
+ */
 char *get_location(char *command)
 {
 	char *path, *pathCopy, *pathToken, *filePath;
