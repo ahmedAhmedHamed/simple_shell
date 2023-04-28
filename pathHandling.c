@@ -13,11 +13,10 @@ char *findEnv(char *search)
 	for (i = 0; environ[i] != NULL; i++)
 	{
 		if (environ[i][0] == 'P')
-			if (environ[i][1] == 'A')
-				if (environ[i][2] == 'T')
-					if (environ[i][3] == 'H')
-						if (environ[i][4] == '=')
-							return (environ[i]);
+		if (environ[i][1] == 'A')
+		if (environ[i][2] == 'T')
+		if (environ[i][3] == 'H')
+			return (environ[i]);
 	}
 
 	return (NULL);
@@ -48,14 +47,15 @@ char *myStrDup(char *toDupe)
  * @source: ...
  * Return: new string
  */
-char* my_strcat(char* destination, const char* source) {
+char *my_strcat(char *destination, const char *source)
+{
 	char *ptr = destination + strlen(destination);
 
 	while (*source != '\0')
 		*ptr++ = *source++;
 
 	*ptr = '\0';
-	return destination;
+	return (destination);
 }
 
 /**
@@ -71,19 +71,15 @@ char *get_location(char *command)
 
 	path = findEnv("PATH");
 
-	if (path){
-		/* Duplicate the path string -> remember to free up memory for this because strdup allocates memory that needs to be freed*/
+	if (path)
+	{
 		pathCopy = myStrDup(path);
-		/* Get length of the command that was passed */
 		commandLength = _strlen(command);
-		/* Let's break down the path variable and get all the directories available*/
 		pathToken = strtok(pathCopy, ":");/*strtok usage :(*/
-		while(pathToken != NULL){
-			/* Get the length of the directory*/
+		while (pathToken != NULL)
+		{
 			directory_length = _strlen(pathToken);
-			/* allocate memory for storing the command name together with the directory name */
-			filePath = malloc(commandLength + directory_length + 2); /* NB: we added 2 for the slash and null character we will introduce in the full command */
-			/* to build the path for the command, let's copy the directory path and concatenate the command to it */
+			filePath = malloc(commandLength + directory_length + 2);
 			myStrCpy(pathToken, &filePath);
 			my_strcat(filePath, "/");
 			my_strcat(filePath, command);

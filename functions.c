@@ -46,14 +46,14 @@ int systemCallWrapper(char *nextArgv[], char *b, char *envp[])
 
 	if (isEqual(nextArgv[0], "setenv"))
 	{
-		returnCode = (sysSetEnv(nextArgv));
+		(returnCode) = sysSetEnv(nextArgv);
 		freeAll(b, nextArgv);
 		return (returnCode);
 	}
 
 	if (isEqual(nextArgv[0], "unsetenv"))
 	{
-		returnCode = (_unsetenv(nextArgv));
+		(returnCode) = (_unsetenv(nextArgv));
 		freeAll(b, nextArgv);
 		return (returnCode);
 	}
@@ -61,7 +61,7 @@ int systemCallWrapper(char *nextArgv[], char *b, char *envp[])
 	if (isEqual(nextArgv[0], "cd"))/*likely need to handle $VARIABLE*/
 	{
 		free(b);
-		return(changeDir(nextArgv));
+		return (changeDir(nextArgv));
 	}
 
 	return (0);

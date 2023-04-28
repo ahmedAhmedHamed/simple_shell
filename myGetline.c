@@ -101,11 +101,9 @@ ssize_t myGetline(char **lineptr, size_t *n, FILE *stream)
 	else
 		return (-1);
 	input = 0;
-
 	buffer = malloc(sizeof(char) * 120);
 	if (!buffer)
 		return (-1);
-
 	while (c != '\n')
 	{
 		r = read(STDIN_FILENO, &c, 1);
@@ -127,9 +125,7 @@ ssize_t myGetline(char **lineptr, size_t *n, FILE *stream)
 		input++;
 	}
 	buffer[input] = '\0';
-
 	assignLineptr(lineptr, n, buffer, input);
-
 	ret = input;
 	if (r != 0)
 		input = 0;

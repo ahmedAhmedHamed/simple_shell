@@ -1,6 +1,3 @@
-/*the functions that are in the system call wrapper are here
- *(the system call wrapper is in the functions file)
- */
 #ifndef SIMPLE_SHELL_SYSTEMCALLS_H
 #define SIMPLE_SHELL_SYSTEMCALLS_H
 int sysSetEnv(char *argv[10]);

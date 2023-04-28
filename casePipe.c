@@ -25,6 +25,7 @@ int hasSlash(char *target)
  * handlePipeInput - handles input from pipe
  * @argv: ...
  * @envp: ...
+ * @progName: ...
  * Return: the process ID of the previous process
  */
 int handlePipeInput(char *argv[], char *envp[], char *progName)
@@ -40,7 +41,7 @@ int handlePipeInput(char *argv[], char *envp[], char *progName)
 		{
 			write(STDERR_FILENO, progName, _strlen(progName));
 			write(STDERR_FILENO, ": 1:", 4);
-			write (STDERR_FILENO, argv[0], _strlen(argv[0]));
+			write(STDERR_FILENO, argv[0], _strlen(argv[0]));
 			write(STDERR_FILENO, ": not found\n", 12);
 			return (0);
 		}
