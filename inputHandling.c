@@ -21,7 +21,6 @@ int setupInput(char *_argv[10], char **b)
 }
 
 
-
 /**
  * strtoking - separates b into nextArgv using a space as a delimiter
  * i is where you stop, j is where you end, l is for the new string.

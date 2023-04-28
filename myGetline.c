@@ -33,7 +33,7 @@ void *myRealloc(void *ptr, unsigned int old_size, unsigned int new_size)
 	}
 
 	ptr_copy = ptr;
-	mem = malloc(sizeof(*ptr_copy) * new_size);
+	mem = malloc(sizeof(*ptr_copy) * new_size + 1);
 	if (mem == NULL)
 	{
 		free(ptr);
@@ -50,7 +50,7 @@ void *myRealloc(void *ptr, unsigned int old_size, unsigned int new_size)
 }
 
 /**
- * assignLineptr - Reassigns the lineptr variable for _getline.
+ * assignLineptr - Reassigns the lineptr variable for myGetline.
  * @lineptr: The linept
  * @n: The size of the linept
  * @buffer: The string to be put in the lineptr
@@ -82,7 +82,7 @@ void assignLineptr(char **lineptr, size_t *n, char *buffer, size_t b)
 }
 
 /**
- * _getline - Reads input from a stream.
+ * myGetline - Reads input from a stream.
  * @lineptr: A buffer to store the input.
  * @n: The size of lineptr.
  * @stream: The stream to read from.

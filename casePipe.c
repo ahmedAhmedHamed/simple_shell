@@ -75,7 +75,7 @@ int pipedInputCase(char *progName, char *envp[])
 {
 	int characters;
 	int waitID = 0;
-	char *b = NULL;/*necessary for usage with getline*/
+	char *b = NULL;/*necessary for usage with myGetline*/
 	char *nextArgv[10];
 
 	while (true)
