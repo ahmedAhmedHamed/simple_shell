@@ -1,1 +1,1 @@
-mayten de sho8lana
+simple shell written in C
